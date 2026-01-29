@@ -42,7 +42,6 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
         "INSERT INTO topics(slug, description, img_url) VALUES %L RETURNING *",
         formattedTopics,
       );
-      // console.log(queryStr);
       return db.query(queryStr);
     })
     .then(({ rows: topics }) => {
@@ -77,7 +76,6 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
     })
     .then(({ rows: articles }) => {
       const lookUpId = createLookUpObj(articles, "title", "article_id");
-      console.log("ID lookup object: ", lookUpId);
       const formattedComments = commentData.map((comment) => {
         return [
           lookUpValue(comment.article_title, lookUpId),
@@ -91,12 +89,8 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
         "INSERT INTO comments(article_id, body, votes, author,created_at) VALUES %L RETURNING *",
         formattedComments,
       );
-      console.log(queryStr);
       return db.query(queryStr);
     });
 };
-// .then(() => {
-//   return db.query("INSERT INTO topics (a, b) VALUES( ,  ),( , ),( , ) ;");
-// });
 
 module.exports = seed;
