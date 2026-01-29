@@ -1,9 +1,15 @@
-const devData = require('../data/development-data/index.js');
-const seed = require('./seed.js');
-const db = require('../connection.js');
+//this file is the endpoint of where everything joins forces
+const devData = require("../data/development-data/index.js");
+const seed = require("./seed.js");
+const db = require("../connection.js");
 
 const runSeed = () => {
-  return seed(devData).then(() => db.end());
+  console.log("devData: ", devData);
+  // console.log("seed: ", seed());
+  // console.log("db: ", db);
+  return seed(devData).then(() => {
+    db.end();
+  });
 };
 
 runSeed();
