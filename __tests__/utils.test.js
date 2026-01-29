@@ -15,9 +15,9 @@ describe("createLookUpObj(list, var1, var2)", () => {
       { title: "title1", id: 1, someOtherStuff: "some random strings" },
       { title: "title2", id: 2, someOtherStuff: "randome strings" },
     ];
-    const var1 = "title";
-    const var2 = "id";
-    const lookUpObj = createLookUpObj(list, var1, var2);
+    const name1 = "title";
+    const name2 = "id";
+    const lookUpObj = createLookUpObj(list, name1, name2);
     expect(lookUpObj).toEqual({ title1: 1, title2: 2 });
   });
 });
