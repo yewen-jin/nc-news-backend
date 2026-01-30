@@ -1,6 +1,7 @@
 const db = require("./connection");
 const path = require("path");
 const fs = require("node:fs/promises");
+const { get } = require("node:http");
 
 const getUsers = () => {
   return db
@@ -108,11 +109,29 @@ const getCommentsAboveVotes = (num) => {
     });
 };
 
-getUsers();
-getCodingArticles();
-getNegativeVotesComments();
-getTopics();
-getArticlesByUser("grumpy19");
-getCommentsAboveVotes(10);
+const getJunctionTable = (table, column1, column2) => {
+  return db
+    .query(`SELECT ${column1}, ${column2} FROM ${table};`)
+    .then(({ rows }) => {
+      const joinedStr = JSON.stringify(rows);
+      fs.writeFile(
+        __dirname + "/fetched-data/" + column1 + "-" + column2 + ".json",
+        joinedStr,
+      ).then(() => {
+        console.log(
+          `joined table between ${column1} and ${column2} is written`,
+        );
+      });
+    });
+};
+
+// getUsers();
+// getCodingArticles();
+// getNegativeVotesComments();
+// getTopics();
+// getArticlesByUser("grumpy19");
+// getCommentsAboveVotes(10);
+
+getJunctionTable("articles", "topic", "author");
 
 db.end();
