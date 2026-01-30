@@ -38,5 +38,11 @@ You are now connected to database "nc_news" as user "yewenjin".
            |         |          '|  ||    +
            |         |           _\_):,_  +
            |         |  
-(5 rows)
+         6 | duck    |                    +
+           |         |   __               +
+           |         | <(o )___           +
+           |         |  ( ._> /           +
+           |         |   '---'            +
+           |         | 
+(6 rows)
 

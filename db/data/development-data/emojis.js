@@ -3,6 +3,8 @@ module.exports = [
   { emoji: "🦉", emoji_name: "owl", type: "animals" },
   { emoji: "🐟", emoji_name: "fish", type: "animals" },
   { emoji: "🦑", emoji_name: "squid", type: "animals" },
+  { emoji: "🐧", emoji_name: "penguin", type: "animals" },
+  { emoji: "🦆", emoji_name: "duck", type: "animals" },
   { emoji: "😆", emoji_name: "laugh", type: "expressions" },
   { emoji: "🙂", emoji_name: "smile", type: "expressions" },
   { emoji: "😅", emoji_name: "laugh_sweat", type: "expressions" },

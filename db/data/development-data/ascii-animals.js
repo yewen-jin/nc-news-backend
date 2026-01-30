@@ -51,4 +51,13 @@ module.exports = [
           _\_):,_
  `,
   },
+  {
+    animal: "duck",
+    drawing: String.raw`
+  __
+<(o )___
+ ( ._> /
+  '---'
+`,
+  },
 ];

@@ -5,21 +5,23 @@ You are now connected to database "nc_news" as user "yewenjin".
         2 | 🦉    | owl             | animals
         3 | 🐟    | fish            | animals
         4 | 🦑    | squid           | animals
-        5 | 😆    | laugh           | expressions
-        6 | 🙂    | smile           | expressions
-        7 | 😅    | laugh_sweat     | expressions
-        8 | 🥲    | laugh_tears     | expressions
-        9 | 😝    | blep            | expressions
-       10 | 🥺    | teary_eyes      | expressions
-       11 | 🤞🏻    | fingers_crossed | expressions
-       12 | ❤️    | heart           | expressions
-       13 | 💔    | heart_broken    | expressions
-       14 | 🌟    | star            | sky
-       15 | 🌙    | moon            | sky
-       16 | 🌞    | sun             | sky
-       17 | 🍄    | mushroom        | food
-       18 | 🍣    | sushi           | food
-       19 | 🍩    | donut           | food
-       20 | 🍅    | tomato          | food
-(20 rows)
+        5 | 🐧    | penguin         | animals
+        6 | 🦆    | duck            | animals
+        7 | 😆    | laugh           | expressions
+        8 | 🙂    | smile           | expressions
+        9 | 😅    | laugh_sweat     | expressions
+       10 | 🥲    | laugh_tears     | expressions
+       11 | 😝    | blep            | expressions
+       12 | 🥺    | teary_eyes      | expressions
+       13 | 🤞🏻    | fingers_crossed | expressions
+       14 | ❤️    | heart           | expressions
+       15 | 💔    | heart_broken    | expressions
+       16 | 🌟    | star            | sky
+       17 | 🌙    | moon            | sky
+       18 | 🌞    | sun             | sky
+       19 | 🍄    | mushroom        | food
+       20 | 🍣    | sushi           | food
+       21 | 🍩    | donut           | food
+       22 | 🍅    | tomato          | food
+(22 rows)
 
