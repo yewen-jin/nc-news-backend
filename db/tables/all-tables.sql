@@ -1,5 +1,4 @@
 You are now connected to database "nc_news" as user "yewenjin".
-
                          Table "public.topics"
    Column    |          Type           | Collation | Nullable | Default 
 -------------+-------------------------+-----------+----------+---------
@@ -9,7 +8,7 @@ You are now connected to database "nc_news" as user "yewenjin".
 Indexes:
     "topics_pkey" PRIMARY KEY, btree (slug)
 Referenced by:
-    TABLE "articles" CONSTRAINT "fk_topic" FOREIGN KEY (topic) REFERENCES topics(slug)
+    TABLE "articles" CONSTRAINT "fk_article_topic" FOREIGN KEY (topic) REFERENCES topics(slug)
 
                          Table "public.users"
    Column   |          Type           | Collation | Nullable | Default 
@@ -20,8 +19,8 @@ Referenced by:
 Indexes:
     "users_pkey" PRIMARY KEY, btree (username)
 Referenced by:
-    TABLE "comments" CONSTRAINT "comments_author_fkey" FOREIGN KEY (author) REFERENCES users(username)
-    TABLE "articles" CONSTRAINT "fk_author" FOREIGN KEY (author) REFERENCES users(username)
+    TABLE "articles" CONSTRAINT "fk_article_author" FOREIGN KEY (author) REFERENCES users(username)
+    TABLE "comments" CONSTRAINT "fk_comment_author" FOREIGN KEY (author) REFERENCES users(username)
 
                                                Table "public.articles"
      Column      |            Type             | Collation | Nullable |                   Default                    
@@ -37,8 +36,8 @@ Referenced by:
 Indexes:
     "articles_pkey" PRIMARY KEY, btree (article_id)
 Foreign-key constraints:
-    "fk_author" FOREIGN KEY (author) REFERENCES users(username)
-    "fk_topic" FOREIGN KEY (topic) REFERENCES topics(slug)
+    "fk_article_author" FOREIGN KEY (author) REFERENCES users(username)
+    "fk_article_topic" FOREIGN KEY (topic) REFERENCES topics(slug)
 Referenced by:
     TABLE "comments" CONSTRAINT "fk_article_id" FOREIGN KEY (article_id) REFERENCES articles(article_id)
 
@@ -54,6 +53,6 @@ Referenced by:
 Indexes:
     "comments_pkey" PRIMARY KEY, btree (comment_id)
 Foreign-key constraints:
-    "comments_author_fkey" FOREIGN KEY (author) REFERENCES users(username)
     "fk_article_id" FOREIGN KEY (article_id) REFERENCES articles(article_id)
+    "fk_comment_author" FOREIGN KEY (author) REFERENCES users(username)
 
