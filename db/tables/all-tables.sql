@@ -9,7 +9,7 @@ You are now connected to database "nc_news" as user "yewenjin".
 Indexes:
     "topics_pkey" PRIMARY KEY, btree (slug)
 Referenced by:
-    TABLE "articles" CONSTRAINT "articles_topic_fkey" FOREIGN KEY (topic) REFERENCES topics(slug)
+    TABLE "articles" CONSTRAINT "fk_topic" FOREIGN KEY (topic) REFERENCES topics(slug)
 
                          Table "public.users"
    Column   |          Type           | Collation | Nullable | Default 
@@ -20,8 +20,8 @@ Referenced by:
 Indexes:
     "users_pkey" PRIMARY KEY, btree (username)
 Referenced by:
-    TABLE "articles" CONSTRAINT "articles_author_fkey" FOREIGN KEY (author) REFERENCES users(username)
     TABLE "comments" CONSTRAINT "comments_author_fkey" FOREIGN KEY (author) REFERENCES users(username)
+    TABLE "articles" CONSTRAINT "fk_author" FOREIGN KEY (author) REFERENCES users(username)
 
                                                Table "public.articles"
      Column      |            Type             | Collation | Nullable |                   Default                    
@@ -37,10 +37,10 @@ Referenced by:
 Indexes:
     "articles_pkey" PRIMARY KEY, btree (article_id)
 Foreign-key constraints:
-    "articles_author_fkey" FOREIGN KEY (author) REFERENCES users(username)
-    "articles_topic_fkey" FOREIGN KEY (topic) REFERENCES topics(slug)
+    "fk_author" FOREIGN KEY (author) REFERENCES users(username)
+    "fk_topic" FOREIGN KEY (topic) REFERENCES topics(slug)
 Referenced by:
-    TABLE "comments" CONSTRAINT "comments_article_id_fkey" FOREIGN KEY (article_id) REFERENCES articles(article_id)
+    TABLE "comments" CONSTRAINT "fk_article_id" FOREIGN KEY (article_id) REFERENCES articles(article_id)
 
                                             Table "public.comments"
    Column   |            Type             | Collation | Nullable |                   Default                    
@@ -54,6 +54,6 @@ Referenced by:
 Indexes:
     "comments_pkey" PRIMARY KEY, btree (comment_id)
 Foreign-key constraints:
-    "comments_article_id_fkey" FOREIGN KEY (article_id) REFERENCES articles(article_id)
     "comments_author_fkey" FOREIGN KEY (author) REFERENCES users(username)
+    "fk_article_id" FOREIGN KEY (article_id) REFERENCES articles(article_id)
 
