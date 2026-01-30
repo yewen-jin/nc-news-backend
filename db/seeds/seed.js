@@ -139,8 +139,18 @@ const seed = ({
         return [ascii.animal, ascii.drawing];
       });
       const queryStr = format(
-        "INSERT INTO ascii_animals(animal, drawing)VALUES %L RETURNING *",
+        "INSERT INTO ascii_animals(animal, drawing)VALUES %L",
         formattedAscii,
+      );
+      return db.query(queryStr);
+    })
+    .then(() => {
+      const formattedEmoji = emojiData.map((emoji) => {
+        return [emoji.emoji, emoji.emoji_name, emoji.type];
+      });
+      const queryStr = format(
+        "INSERT INTO emojis(emoji, emoji_name, emoji_type) VALUES %L RETURNING *",
+        formattedEmoji,
       );
       return db.query(queryStr);
     })

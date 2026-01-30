@@ -18,8 +18,8 @@
 -- SELECT * FROM articles;
 -- SELECT * FROM comments;
 
-SELECT * FROM ascii_animals;
--- SELECT * FROM emojis;
+-- SELECT * FROM ascii_animals;
+SELECT * FROM emojis;
 -- SELECT * FROM emoji_article_user;
 -- SELECT * FROM user_topic;
 -- SELECT * FROM user_article_votes;
