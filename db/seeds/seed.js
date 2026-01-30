@@ -26,12 +26,12 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
     })
     .then(() => {
       return db.query(
-        "CREATE TABLE articles(\n article_id SERIAL PRIMARY KEY, \n title VARCHAR(300) NOT NULL, \n topic VARCHAR(20) NOT NULL, \n author VARCHAR(20) NOT NULL , \n body TEXT NOT NULL, \n created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, \n votes INT DEFAULT 0, \n article_img_url VARCHAR(1000), \n CONSTRAINT fk_topic FOREIGN KEY (topic) REFERENCES topics(slug), \n CONSTRAINT fk_author FOREIGN KEY (author) REFERENCES users(username) \n);",
+        "CREATE TABLE articles(\n article_id SERIAL PRIMARY KEY, \n title VARCHAR(300) NOT NULL, \n topic VARCHAR(20) NOT NULL, \n author VARCHAR(20) NOT NULL, \n body TEXT NOT NULL, \n created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, \n votes INT DEFAULT 0, \n article_img_url VARCHAR(1000), \n CONSTRAINT fk_article_topic FOREIGN KEY (topic) REFERENCES topics(slug), \n CONSTRAINT fk_article_author FOREIGN KEY (author) REFERENCES users(username) \n);",
       );
     })
     .then(() => {
       return db.query(
-        "CREATE TABLE comments(\n comment_id SERIAL PRIMARY KEY, \n article_id INT NOT NULL, \n body TEXT, \n votes INT DEFAULT 0, \n author VARCHAR(20) NOT NULL REFERENCES users(username), \n created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, \n CONSTRAINT fk_article_id FOREIGN KEY (article_id) REFERENCES articles(article_id) \n);",
+        "CREATE TABLE comments(\n comment_id SERIAL PRIMARY KEY, \n article_id INT NOT NULL, \n body TEXT, \n votes INT DEFAULT 0, \n author VARCHAR(20) NOT NULL, \n created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, \n CONSTRAINT fk_article_id FOREIGN KEY (article_id) REFERENCES articles(article_id), \n CONSTRAINT fk_comment_author FOREIGN KEY (author) REFERENCES users(username) \n);",
       );
     })
     .then(() => {
