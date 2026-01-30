@@ -10,6 +10,7 @@ describe("createLookupObj(list, var1, var2)", () => {
     const listDup = [...list];
     const lookupStuff = createLookupObj(list, "title", "stuff");
     expect(list).toEqual(listDup);
+    expect(list).not.toBe(listDup);
   });
   test("returns an empty object when passed an empty array", () => {
     const lookupStuff = createLookupObj([], "blip", "blop");
