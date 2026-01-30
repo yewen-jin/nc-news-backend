@@ -21,7 +21,7 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
     })
     .then(() => {
       return db.query(
-        "CREATE TABLE users(\n username VARCHAR(20) PRIMARY KEY, \n name VARCHAR(40), \n avatar_url VARCHAR(1000) \n);",
+        "CREATE TABLE users(\n username VARCHAR(20) PRIMARY KEY, \n name VARCHAR(40) NOT NULL, \n avatar_url VARCHAR(1000) \n);",
       );
     })
     .then(() => {
@@ -31,7 +31,7 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
     })
     .then(() => {
       return db.query(
-        "CREATE TABLE comments(\n comment_id SERIAL PRIMARY KEY, \n article_id INT NOT NULL, \n body TEXT, \n votes INT DEFAULT 0, \n author VARCHAR(20) NOT NULL, \n created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, \n CONSTRAINT fk_article_id FOREIGN KEY (article_id) REFERENCES articles(article_id), \n CONSTRAINT fk_comment_author FOREIGN KEY (author) REFERENCES users(username) \n);",
+        "CREATE TABLE comments(\n comment_id SERIAL PRIMARY KEY, \n article_id INT NOT NULL, \n body TEXT NOT NULL, \n votes INT DEFAULT 0, \n author VARCHAR(20) NOT NULL, \n created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, \n CONSTRAINT fk_article_id FOREIGN KEY (article_id) REFERENCES articles(article_id), \n CONSTRAINT fk_comment_author FOREIGN KEY (author) REFERENCES users(username) \n);",
       );
     })
     .then(() => {

@@ -14,7 +14,7 @@ Referenced by:
    Column   |          Type           | Collation | Nullable | Default 
 ------------+-------------------------+-----------+----------+---------
  username   | character varying(20)   |           | not null | 
- name       | character varying(40)   |           |          | 
+ name       | character varying(40)   |           | not null | 
  avatar_url | character varying(1000) |           |          | 
 Indexes:
     "users_pkey" PRIMARY KEY, btree (username)
@@ -46,7 +46,7 @@ Referenced by:
 ------------+-----------------------------+-----------+----------+----------------------------------------------
  comment_id | integer                     |           | not null | nextval('comments_comment_id_seq'::regclass)
  article_id | integer                     |           | not null | 
- body       | text                        |           |          | 
+ body       | text                        |           | not null | 
  votes      | integer                     |           |          | 0
  author     | character varying(20)       |           | not null | 
  created_at | timestamp without time zone |           |          | CURRENT_TIMESTAMP
