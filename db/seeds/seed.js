@@ -1,6 +1,6 @@
 const db = require("../connection");
 const format = require("pg-format");
-const { lookupValue, createLookupObj } = require("../../utils");
+const { createLookupObj } = require("../../utils");
 
 const seed = ({ topicData, userData, articleData, commentData }) => {
   return db
@@ -26,12 +26,12 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
     })
     .then(() => {
       return db.query(
-        "CREATE TABLE articles(\n article_id SERIAL PRIMARY KEY, \n title VARCHAR(300) NOT NULL, \n topic VARCHAR(20) NOT NULL REFERENCES topics(slug), \n author VARCHAR(20) NOT NULL REFERENCES users(username), \n body TEXT NOT NULL, \n created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, \n votes INT DEFAULT 0, \n article_img_url VARCHAR(1000) \n);",
+        "CREATE TABLE articles(\n article_id SERIAL PRIMARY KEY, \n title VARCHAR(300) NOT NULL, \n topic VARCHAR(20) NOT NULL, \n author VARCHAR(20) NOT NULL , \n body TEXT NOT NULL, \n created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, \n votes INT DEFAULT 0, \n article_img_url VARCHAR(1000), \n CONSTRAINT fk_topic FOREIGN KEY (topic) REFERENCES topics(slug), \n CONSTRAINT fk_author FOREIGN KEY (author) REFERENCES users(username) \n);",
       );
     })
     .then(() => {
       return db.query(
-        "CREATE TABLE comments(\n comment_id SERIAL PRIMARY KEY, \n article_id INT NOT NULL REFERENCES articles(article_id), \n body TEXT, \n votes INT DEFAULT 0, \n author VARCHAR(20) NOT NULL REFERENCES users(username), \n created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP \n);",
+        "CREATE TABLE comments(\n comment_id SERIAL PRIMARY KEY, \n article_id INT NOT NULL, \n body TEXT, \n votes INT DEFAULT 0, \n author VARCHAR(20) NOT NULL REFERENCES users(username), \n created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, \n CONSTRAINT fk_article_id FOREIGN KEY (article_id) REFERENCES articles(article_id) \n);",
       );
     })
     .then(() => {
@@ -39,24 +39,22 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
         return [topic.slug, topic.description, topic.img_url];
       });
       const queryStr = format(
-        "INSERT INTO topics(slug, description, img_url) VALUES %L RETURNING *",
+        "INSERT INTO topics(slug, description, img_url) VALUES %L",
         formattedTopics,
       );
       return db.query(queryStr);
     })
-    .then(({ rows: topics }) => {
-      // console.log(topics, "<< topics");
+    .then(() => {
       const formattedUsers = userData.map((user) => {
         return [user.username, user.name, user.avatar_url];
       });
       const queryStr = format(
-        "INSERT INTO users(username, name, avatar_url) VALUES %L RETURNING *",
+        "INSERT INTO users(username, name, avatar_url) VALUES %L",
         formattedUsers,
       );
       return db.query(queryStr);
     })
-    .then(({ rows: users }) => {
-      // console.log(users, "<< users");
+    .then(() => {
       const formattedArticles = articleData.map((article) => {
         return [
           article.title,
@@ -78,7 +76,7 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
       const lookupId = createLookupObj(articles, "title", "article_id");
       const formattedComments = commentData.map((comment) => {
         return [
-          lookupValue(comment.article_title, lookupId),
+          lookupId[comment.article_title],
           comment.body,
           comment.votes,
           comment.author,
