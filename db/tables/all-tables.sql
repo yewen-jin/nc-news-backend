@@ -1,4 +1,5 @@
 You are now connected to database "nc_news" as user "yewenjin".
+
                          Table "public.topics"
    Column    |          Type           | Collation | Nullable | Default 
 -------------+-------------------------+-----------+----------+---------

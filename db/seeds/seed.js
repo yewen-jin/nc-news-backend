@@ -1,6 +1,6 @@
 const db = require("../connection");
 const format = require("pg-format");
-const { lookUpValue, createLookUpObj } = require("../../utils");
+const { lookupValue, createLookupObj } = require("../../utils");
 
 const seed = ({ topicData, userData, articleData, commentData }) => {
   return db
@@ -75,10 +75,10 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
       return db.query(queryStr);
     })
     .then(({ rows: articles }) => {
-      const lookUpId = createLookUpObj(articles, "title", "article_id");
+      const lookupId = createLookupObj(articles, "title", "article_id");
       const formattedComments = commentData.map((comment) => {
         return [
-          lookUpValue(comment.article_title, lookUpId),
+          lookupValue(comment.article_title, lookupId),
           comment.body,
           comment.votes,
           comment.author,

@@ -1,17 +1,17 @@
-function lookUpValue(name, lookUpObj) {
-  for (const obj in lookUpObj) {
+function lookupValue(name, lookupObj) {
+  for (const obj in lookupObj) {
     if (obj === name) {
-      return lookUpObj[obj];
+      return lookupObj[obj];
     }
   }
 }
 
-function createLookUpObj(list, name1, name2) {
-  const lookUpObj = {};
+function createLookupObj(list, name1, name2) {
+  const lookupObj = {};
   list.forEach((item) => {
-    lookUpObj[item[name1]] = item[name2];
+    lookupObj[item[name1]] = item[name2];
   });
-  return lookUpObj;
+  return lookupObj;
 }
 
-module.exports = { lookUpValue, createLookUpObj };
+module.exports = { lookupValue, createLookupObj };
