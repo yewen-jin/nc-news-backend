@@ -109,9 +109,11 @@ const getCommentsAboveVotes = (num) => {
     });
 };
 
-const getJunctionTable = (table, column1, column2) => {
+const getFromTable = (table, column1, column2) => {
   return db
-    .query(`SELECT ${column1}, ${column2} FROM ${table};`)
+    .query(
+      `SELECT DISTINCT ${column1}, ${column2} FROM ${table} ORDER BY ${column1};`,
+    )
     .then(({ rows }) => {
       const joinedStr = JSON.stringify(rows);
       fs.writeFile(
@@ -132,6 +134,6 @@ const getJunctionTable = (table, column1, column2) => {
 // getArticlesByUser("grumpy19");
 // getCommentsAboveVotes(10);
 
-getJunctionTable("articles", "topic", "author");
+getFromTable("articles", "author", "topic");
 
 db.end();
