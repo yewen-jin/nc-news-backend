@@ -6,6 +6,21 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
   return db
     .query("DROP TABLE IF EXISTS comments;")
     .then(() => {
+      return db.query("DROP TABLE IF EXISTS emoji_article_user;");
+    })
+    .then(() => {
+      return db.query("DROP TABLE IF EXISTS emojis;");
+    })
+    .then(() => {
+      return db.query("DROP TABLE IF EXISTS ascii_animals;");
+    })
+    .then(() => {
+      return db.query("DROP TABLE IF EXISTS user_topic");
+    })
+    .then(() => {
+      return db.query("DROP TABLE IF EXISTS user_article_votes");
+    })
+    .then(() => {
       return db.query("DROP TABLE IF EXISTS articles;");
     })
     .then(() => {
@@ -32,6 +47,26 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
     .then(() => {
       return db.query(
         "CREATE TABLE comments(\n comment_id SERIAL PRIMARY KEY, \n article_id INT NOT NULL, \n body TEXT NOT NULL, \n votes INT DEFAULT 0, \n author VARCHAR(20) NOT NULL, \n created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, \n CONSTRAINT fk_article_id FOREIGN KEY (article_id) REFERENCES articles(article_id), \n CONSTRAINT fk_comment_author FOREIGN KEY (author) REFERENCES users(username) \n);",
+      );
+    })
+    .then(() => {
+      return db.query(
+        "CREATE TABLE user_topic(\n user_topic_id SERIAL PRIMARY KEY, \n username VARCHAR(20) NOT NULL, \n topic VARCHAR(20) NOT NULL \n);",
+      );
+    })
+    .then(() => {
+      return db.query(
+        "CREATE TABLE ascii_animals(\n animal_id SERIAL PRIMARY KEY, \n animal VARCHAR(20) NOT NULL, \n drawing TEXT NOT NULL);",
+      );
+    })
+    .then(() => {
+      return db.query(
+        "CREATE TABLE emojis(\n emoji_id SERIAL PRIMARY KEY, \n emoji VARCHAR NOT NULL, \n emoji_name VARCHAR NOT NULL, \n emoji_type VARCHAR(20) \n);",
+      );
+    })
+    .then(() => {
+      return db.query(
+        "CREATE TABLE emoji_article_user(\n emoji_article_user_id SERIAL PRIMARY KEY, \n emoji_id INT NOT NULL, \n username VARCHAR(20) NOT NULL, \n article_id INT NOT NULL,\n FOREIGN KEY (emoji_id) REFERENCES emojis(emoji_id), \n FOREIGN KEY (username) REFERENCES users(username), \n FOREIGN KEY (article_id) REFERENCES articles(article_id) \n);",
       );
     })
     .then(() => {
@@ -88,6 +123,9 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
         formattedComments,
       );
       return db.query(queryStr);
+    })
+    .catch((error) => {
+      console.log("error: ", error);
     });
 };
 
