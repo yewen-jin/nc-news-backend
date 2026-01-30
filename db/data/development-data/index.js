@@ -4,3 +4,4 @@ exports.topicData = require("./topics.js");
 exports.userData = require("./users.js");
 exports.emojiData = require("./emojis.js");
 exports.asciiData = require("./ascii-animals.js");
+exports.userTopicData = require("./user-topic.js");
