@@ -1,7 +1,9 @@
-exports.articleData = require("./articles.js");
-exports.commentData = require("./comments.js");
 exports.topicData = require("./topics.js");
 exports.userData = require("./users.js");
-exports.emojiData = require("./emojis.js");
-exports.asciiData = require("./ascii-animals.js");
+exports.articleData = require("./articles.js");
+exports.commentData = require("./comments.js");
 exports.userTopicData = require("./user-topic.js");
+exports.asciiData = require("./ascii-animals.js");
+exports.emojiData = require("./emojis.js");
+exports.emojiArticleUserData = require("./emoji-article-user.js");
+exports.userArticleVotesData = require("./user-article-votes.js");

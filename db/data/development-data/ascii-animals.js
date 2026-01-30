@@ -1,7 +1,7 @@
 module.exports = [
   {
     animal: "cat",
-    drawing: `
+    drawing: String.raw`
  /\_/\
 ( o.o )
  > ^ <
@@ -9,7 +9,7 @@ module.exports = [
   },
   {
     animal: "owl",
-    drawing: `
+    drawing: String.raw`
  /\ /\
 ((ovo))
 ():::()
@@ -18,7 +18,7 @@ module.exports = [
   },
   {
     animal: "fish",
-    drawing: `
+    drawing: String.raw`
 |\   \\\\__     o
 | \_/    o \    o
 > _   (( <_  oo
@@ -28,7 +28,7 @@ module.exports = [
   },
   {
     animal: "squid",
-    drawing: `
+    drawing: String.raw`
       _______
  ,-~~~       ~~~-,
 (                 )
@@ -39,5 +39,16 @@ module.exports = [
    / / /   \ \ \
    | | |   | | |
 `,
+  },
+  {
+    animal: "penguin",
+    drawing: String.raw`
+         __
+      -=(o '.
+         '.-.\
+         /|  \\
+         '|  ||
+          _\_):,_
+ `,
   },
 ];

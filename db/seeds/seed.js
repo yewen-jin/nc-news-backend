@@ -2,7 +2,17 @@ const db = require("../connection");
 const format = require("pg-format");
 const { createLookupObj } = require("../../utils");
 
-const seed = ({ topicData, userData, articleData, commentData }) => {
+const seed = ({
+  topicData,
+  userData,
+  articleData,
+  commentData,
+  userTopicData,
+  asciiData,
+  emojiData,
+  emojiArticleUserData,
+  userArticleVotesData,
+}) => {
   return db
     .query("DROP TABLE IF EXISTS comments;")
     .then(() => {
@@ -121,6 +131,16 @@ const seed = ({ topicData, userData, articleData, commentData }) => {
       const queryStr = format(
         "INSERT INTO comments(article_id, body, votes, author,created_at) VALUES %L RETURNING *",
         formattedComments,
+      );
+      return db.query(queryStr);
+    })
+    .then(() => {
+      const formattedAscii = asciiData.map((ascii) => {
+        return [ascii.animal, ascii.drawing];
+      });
+      const queryStr = format(
+        "INSERT INTO ascii_animals(animal, drawing)VALUES %L RETURNING *",
+        formattedAscii,
       );
       return db.query(queryStr);
     })
