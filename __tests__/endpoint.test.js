@@ -51,7 +51,7 @@ describe("/api/articles", () => {
 });
 
 describe("/api/articles/:article_id", () => {
-  test("when query with '/:article_id', should return the article with the given article id", () => {
+  test("when query with '/api/articles/:article_id', should return the article with the given article id", () => {
     return request(app)
       .get("/api/articles/1")
       .expect(200)
@@ -65,6 +65,25 @@ describe("/api/articles/:article_id", () => {
         expect(typeof article.created_at).toBe("string");
         expect(typeof article.votes).toBe("number");
         expect(typeof article.article_img_url).toBe("string");
+      });
+  });
+});
+
+describe("/api/articles/:article_id/comments", () => {
+  test("when query with 'api/articles/:article_id/comments', should get a 200 and the list of comments that has the given article id", () => {
+    return request(app)
+      .get("/api/articles/3/comments")
+      .expect(200)
+      .then(({ body }) => {
+        const { comments } = body;
+        comments.forEach((comment) => {
+          expect(comment.article_id).toBe(3);
+          expect(typeof comment.comment_id).toBe("number");
+          expect(typeof comment.body).toBe("string");
+          expect(typeof comment.votes).toBe("number");
+          expect(typeof comment.body).toBe("string");
+          expect(typeof comment.created_at).toBe("string");
+        });
       });
   });
 });

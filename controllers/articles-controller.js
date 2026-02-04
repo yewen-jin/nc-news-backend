@@ -1,6 +1,7 @@
 const {
   getAllArticles: getAllArticlesService,
   getArticleById: getArticleByIdService,
+  getCommentsByArticleId: getCommentsByArticleIdService,
 } = require("../services/articles-services");
 
 exports.getAllArticles = (req, res) => {
@@ -14,5 +15,16 @@ exports.getArticleById = (req, res) => {
   return getArticleByIdService(article_id).then((article) => {
     if (article !== undefined) res.status(200).send({ article });
     else res.status(404).send({ message: "article not found!" });
+  });
+};
+
+exports.getCommentsByArticleId = (req, res) => {
+  const { article_id } = req.params;
+  return getCommentsByArticleIdService(article_id).then((comments) => {
+    if (comments !== undefined) {
+      res.status(200).send({ comments });
+    } else {
+      res.status(404).send({ message: "article not found!" });
+    }
   });
 };
