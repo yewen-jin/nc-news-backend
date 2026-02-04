@@ -12,6 +12,7 @@ exports.getAllArticles = (req, res) => {
 exports.getArticleById = (req, res) => {
   const { article_id } = req.params;
   return getArticleByIdService(article_id).then((article) => {
-    res.status(200).send({ article });
+    if (article !== undefined) res.status(200).send({ article });
+    else res.status(404).send({ message: "article not found!" });
   });
 };
