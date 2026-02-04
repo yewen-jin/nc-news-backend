@@ -27,6 +27,7 @@ You are now connected to database "nc_news" as user "yewenjin".
  tickle122    | Defensive Metrics: Measuring the Intensity of a High Press                            |         22 | football | 2020-04-17 13:10:00 |     0 | https://images.pexels.com/photos/906073/pexels-photo-906073.jpeg?w=700&h=700               |             8
  weegembump   | HOW COOKING HAS CHANGED US                                                            |         26 | cooking  | 2020-04-06 01:00:00 |     0 | https://images.pexels.com/photos/2284166/pexels-photo-2284166.jpeg?w=700&h=700             |            11
  weegembump   | Sunday league football                                                                |         23 | football | 2020-03-22 14:25:00 |     0 | https://images.pexels.com/photos/774321/pexels-photo-774321.jpeg?w=700&h=700               |            14
+ weegembump   | TenHag the man!                                                                       |         37 | football | 2020-03-22 14:25:00 |     0 | https://images.pexels.com/photos/774321/pexels-photo-774321.jpeg?w=700&h=700               |             0
  cooljmessy   | Which current Premier League manager was the best player?                             |         17 | football | 2020-03-19 11:15:00 |     0 | https://images.pexels.com/photos/47343/the-ball-stadion-horn-corner-47343.jpeg?w=700&h=700 |            12
  tickle122    | Why do England managers keep making the same mistakes?                                |         15 | football | 2020-03-19 00:14:00 |     0 | https://images.pexels.com/photos/262524/pexels-photo-262524.jpeg?w=700&h=700               |             4
  weegembump   | Sweet potato & butternut squash soup with lemon & garlic toast                        |         25 | cooking  | 2020-03-11 21:16:00 |     0 | https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?w=700&h=700             |             4
@@ -37,5 +38,5 @@ You are now connected to database "nc_news" as user "yewenjin".
  jessjelly    | Twice-Baked Butternut Squash Is the Thanksgiving Side Dish of Your Dreams             |         30 | cooking  | 2020-01-11 20:20:00 |     0 | https://images.pexels.com/photos/175753/pexels-photo-175753.jpeg?w=700&h=700               |             8
  tickle122    | A BRIEF HISTORY OF FOOD—NO BIG DEAL                                                   |         29 | cooking  | 2020-01-06 20:12:00 |     0 | https://images.pexels.com/photos/357743/pexels-photo-357743.jpeg?w=700&h=700               |            10
  happyamy2016 | High Altitude Cooking                                                                 |         28 | cooking  | 2020-01-04 00:24:00 |     0 | https://images.pexels.com/photos/691114/pexels-photo-691114.jpeg?w=700&h=700               |             5
-(36 rows)
+(37 rows)
 
