@@ -21,10 +21,10 @@ exports.getArticleById = (req, res) => {
 exports.getCommentsByArticleId = (req, res) => {
   const { article_id } = req.params;
   return getCommentsByArticleIdService(article_id).then((comments) => {
-    if (comments !== undefined) {
-      res.status(200).send({ comments });
+    if (comments.length === 0) {
+      res.status(404).send({ message: "Comments not found" });
     } else {
-      res.status(404).send({ message: "article not found!" });
+      res.status(200).send({ comments });
     }
   });
 };
