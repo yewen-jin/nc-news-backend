@@ -19,7 +19,9 @@
 -- SELECT * FROM comments;
 
 -- SELECT * FROM ascii_animals;
-SELECT * FROM emojis;
+-- SELECT * FROM emojis;
 -- SELECT * FROM emoji_article_user;
 -- SELECT * FROM user_topic;
 -- SELECT * FROM user_article_votes;
+
+SELECT articles.author, articles.title, articles.article_id, articles.topic, articles.created_at, articles.votes, articles.article_img_url, COUNT(comments.comment_id) AS comment_count FROM articles JOIN comments ON articles.article_id = comments.article_id GROUP BY articles.article_id ORDER BY articles.created_at DESC;
