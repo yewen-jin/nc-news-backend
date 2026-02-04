@@ -10,6 +10,6 @@ app.use(express.json());
 
 app.use("/api/topics", topicsRouter);
 app.use("/api/articles", articlesRouter);
-// app.use("/api/users", usersRouter);
+app.use("/api/users", usersRouter);
 
 module.exports = app;
