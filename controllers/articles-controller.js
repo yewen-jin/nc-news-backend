@@ -10,12 +10,17 @@ exports.getAllArticles = (req, res) => {
   });
 };
 
-exports.getArticleById = (req, res) => {
+exports.getArticleById = (req, res, next) => {
   const { article_id } = req.params;
-  return getArticleByIdService(article_id).then((article) => {
-    if (article !== undefined) res.status(200).send({ article });
-    else res.status(404).send({ message: "article not found!" });
-  });
+  return getArticleByIdService(article_id)
+    .then((article) => {
+      res.status(200).send({ article });
+    })
+    .catch((err) => {
+      console.log("error in controller: ", err);
+      // res.status(404).send({ msg: err.message });
+      next(err);
+    });
 };
 
 exports.getCommentsByArticleId = (req, res) => {

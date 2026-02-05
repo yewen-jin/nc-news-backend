@@ -2,7 +2,7 @@ const request = require("supertest");
 const app = require("../app");
 const db = require("../db/connection");
 const seed = require("../db/seeds/seed");
-const data = require("../db/data/test-data");
+const data = require("../db/data/test-data/index.js");
 
 beforeEach(() => {
   return seed(data);
@@ -12,8 +12,8 @@ afterAll(() => {
   return db.end();
 });
 
-describe("/api/topics", () => {
-  test("should return a list of all topics including slugs, descriptions, and image_url if there is any", () => {
+describe("GET: /api/topics", () => {
+  test("200: Responds with a list of all topics including slugs, descriptions, and image_url if there is any", () => {
     return request(app)
       .get("/api/topics")
       .expect(200)
@@ -28,14 +28,20 @@ describe("/api/topics", () => {
   });
 });
 
-describe("/api/articles", () => {
-  test("by default should return a list of articles including author, title, article id, topic, created_at, votes, article_img_url, comment_count", () => {
+describe("GET: /api/articles", () => {
+  test("200: Responds with a list of article objects", () => {
     return request(app)
       .get("/api/articles")
       .expect(200)
       .then(({ body }) => {
         const { articles } = body;
         expect(Array.isArray(articles)).toBe(true);
+      });
+  });
+  test("200: Each article object should have properties of author, title, article id, topic, created_at, votes and article_img_url", () => {
+    return request(app)
+      .get("/api/articles")
+      .then(({ body: { articles } }) => {
         articles.forEach((article) => {
           expect(typeof article.author).toBe("string");
           expect(typeof article.title).toBe("string");
@@ -44,20 +50,33 @@ describe("/api/articles", () => {
           expect(typeof article.created_at).toBe("string");
           expect(typeof article.votes).toBe("number");
           expect(typeof article.article_img_url).toBe("string");
+        });
+      });
+  });
+  test("200: Each article object should have a property of comment_count", () => {
+    return request(app)
+      .get("/api/articles")
+      .then(({ body: { articles } }) => {
+        articles.forEach((article) => {
           expect(typeof article.comment_count).toBe("number");
         });
       });
   });
+  test("200: the articles should be sorted in descending order of creation date", () => {
+    return request(app)
+      .get("/api/articles")
+      .then(({ body: { articles } }) => {});
+  });
 });
 
-describe("/api/articles/:article_id", () => {
-  test("when query with '/api/articles/:article_id', should return the article with the given article id", () => {
+describe("GET: /api/articles/:article_id", () => {
+  test("200: Responds with the details of article with the given a valid article id", () => {
     return request(app)
-      .get("/api/articles/1")
+      .get("/api/articles/6")
       .expect(200)
       .then(({ body }) => {
         const { article } = body;
-        expect(article.article_id).toBe(1);
+        expect(article.article_id).toBe(6);
         expect(typeof article.title).toBe("string");
         expect(typeof article.topic).toBe("string");
         expect(typeof article.author).toBe("string");
@@ -67,10 +86,18 @@ describe("/api/articles/:article_id", () => {
         expect(typeof article.article_img_url).toBe("string");
       });
   });
+  test("404: Responds with a message when passed a valid but non-existent article_id", () => {
+    return request(app)
+      .get("/api/articles/99999")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Article not found!");
+      });
+  });
 });
 
-describe("/api/articles/:article_id/comments", () => {
-  test("when query with 'api/articles/:article_id/comments', should get a 200 and the list of comments that has the given article id", () => {
+describe("GET: /api/articles/:article_id/comments", () => {
+  test("200: Responds with a list of comments that has the given article id", () => {
     return request(app)
       .get("/api/articles/3/comments")
       .expect(200)
@@ -88,8 +115,8 @@ describe("/api/articles/:article_id/comments", () => {
   });
 });
 
-describe("/api/users", () => {
-  test("should return an article when searching with an article id", () => {
+describe("GET: /api/users", () => {
+  test("200: Responds with an article when searching with an article id", () => {
     return request(app)
       .get("/api/users")
       .expect(200)

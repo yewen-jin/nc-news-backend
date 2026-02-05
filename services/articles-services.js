@@ -1,3 +1,4 @@
+const NotFoundError = require("../errors/not-found-error");
 const {
   fetchAllArticles,
   fetchArticleById,
@@ -5,6 +6,14 @@ const {
 } = require("../models/articles-model");
 
 exports.getAllArticles = () => fetchAllArticles();
-exports.getArticleById = (articleId) => fetchArticleById(articleId);
+exports.getArticleById = (articleId) => {
+  return fetchArticleById(articleId).then((article) => {
+    if (article === undefined) {
+      throw new NotFoundError("Article not found!");
+    } else {
+      return article;
+    }
+  });
+};
 exports.getCommentsByArticleId = (articleId) =>
   fetchCommentsByArticleId(articleId);
