@@ -65,7 +65,9 @@ describe("GET: /api/articles", () => {
   test("200: the articles should be sorted in descending order of creation date", () => {
     return request(app)
       .get("/api/articles")
-      .then(({ body: { articles } }) => {});
+      .then(({ body: { articles } }) => {
+        expect(articles).toBeSortedBy("created_at", { descending: true });
+      });
   });
 });
 
