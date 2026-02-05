@@ -18,7 +18,7 @@ app.use("/api/users", usersRouter);
 
 // INVALID PATHS
 // Errors in the previous function wouldn't go into this catch app path function because next(err) contains one argument, and it will go to the next middleware function that has 4 arguments, whereas this one has 3
-app.all("/*path", (req, res, next) => {
+app.all("{*path}", (req, res, next) => {
   res.status(404).send({ msg: "Path not found!" });
 });
 

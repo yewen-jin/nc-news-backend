@@ -2,6 +2,7 @@ const {
   getAllArticles: getAllArticlesService,
   getArticleById: getArticleByIdService,
   getCommentsByArticleId: getCommentsByArticleIdService,
+  postCommentForArticleById: postCommentForArticleByIdService,
 } = require("../services/articles-services");
 
 exports.getAllArticles = (req, res) => {
@@ -31,6 +32,17 @@ exports.getCommentsByArticleId = (req, res, next) => {
     })
     .catch((err) => {
       // console.log("error in controller:", err);
+      next(err);
+    });
+};
+
+exports.postCommentForArticleById = (req, res, next) => {
+  const { article_id } = req.params;
+  return postCommentsForArticle(article_id)
+    .then((addedComments) => {
+      res.status(201).send({ addedComments });
+    })
+    .catch((err) => {
       next(err);
     });
 };
