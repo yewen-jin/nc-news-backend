@@ -17,19 +17,20 @@ exports.getArticleById = (req, res, next) => {
       res.status(200).send({ article });
     })
     .catch((err) => {
-      console.log("error in controller: ", err);
+      // console.log("error in controller: ", err);
       // res.status(404).send({ msg: err.message });
       next(err);
     });
 };
 
-exports.getCommentsByArticleId = (req, res) => {
+exports.getCommentsByArticleId = (req, res, next) => {
   const { article_id } = req.params;
-  return getCommentsByArticleIdService(article_id).then((comments) => {
-    if (comments.length === 0) {
-      res.status(404).send({ message: "Comments not found" });
-    } else {
+  return getCommentsByArticleIdService(article_id)
+    .then((comments) => {
       res.status(200).send({ comments });
-    }
-  });
+    })
+    .catch((err) => {
+      // console.log("error in controller:", err);
+      next(err);
+    });
 };

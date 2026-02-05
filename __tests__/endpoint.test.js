@@ -113,6 +113,14 @@ describe("GET: /api/articles/:article_id/comments", () => {
         });
       });
   });
+  test("404: Responds with a message when the article doesn't exist or there is no comments with this article", () => {
+    return request(app)
+      .get("/api/articles/300/comments")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Comments not found");
+      });
+  });
 });
 
 describe("GET: /api/users", () => {
