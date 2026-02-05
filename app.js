@@ -10,11 +10,20 @@ const app = express();
 
 app.use(express.json());
 
+// VALID PATHS
+// The middleware chain only go into any of these if the endpoint matches the argument string
 app.use("/api/topics", topicsRouter);
 app.use("/api/articles", articlesRouter);
 app.use("/api/users", usersRouter);
 
-//error handling middleware functions
+// INVALID PATHS
+// Errors in the previous function wouldn't go into this catch app path function because next(err) contains one argument, and it will go to the next middleware function that has 4 arguments, whereas this one has 3
+app.all("/*path", (req, res, next) => {
+  res.status(404).send({ msg: "Path not found!" });
+});
+
+// Error handling middleware functions
+// if there are any errors in the middle of the above functions, using next(err) will pass the err object into the next middleware function
 app.use((err, req, res, next) => {
   if (err instanceof NotFoundError) {
     console.log("404 error: ", err);
