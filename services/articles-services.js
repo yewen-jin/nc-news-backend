@@ -21,7 +21,10 @@ exports.getArticleById = (articleId) => {
 exports.getCommentsByArticleId = (articleId) => {
   return fetchCommentsByArticleId(articleId).then((comments) => {
     //is there a way to check if the article doesn't exist or if it exists but doesn't have any comments?
-    if (comments.length === 0) {
+    if ("") {
+    }
+    // The article_id exists but comments count is 0
+    else if (comments.length === 0) {
       throw new NotFoundError("Comments not found");
     } else {
       return comments;

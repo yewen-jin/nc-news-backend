@@ -157,6 +157,15 @@ describe("/api/articles/:article_id/comments", () => {
           });
         });
     });
+    test("200: The list of comments responded should be sorted by descending order", () => {
+      return request(app)
+        .get("/api/articles/3/comments")
+        .expect(200)
+        .then(({ body }) => {
+          const { comments } = body;
+          expect(comments).toBeSortedBy("created_at", { descending: true });
+        });
+    });
     test("404: Responds with a message when the article doesn't exis", () => {
       return request(app)
         .get("/api/articles/300/comments")
