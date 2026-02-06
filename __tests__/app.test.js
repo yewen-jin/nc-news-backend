@@ -275,10 +275,14 @@ describe("/api/comments/:comment_id", () => {
   describe("DELETE", () => {
     test("204: Responds with 204 status code if successfully deleted comment, and the comment with the specific id should be deleted", () => {
       return request(app)
-        .delete("/api/comments/1")
+        .delete("/api/comments/9")
         .expect(204)
         .then(() => {
-          db.query("SELECT comment_id FROM comments WHERE comment_id = 1");
+          db.query("SELECT comment_id FROM comments WHERE comment_id = 9").then(
+            ({ rows }) => {
+              expect(rows.length).toBe(0);
+            },
+          );
         });
     });
   });
