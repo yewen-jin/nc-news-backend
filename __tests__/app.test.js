@@ -1,7 +1,7 @@
 const request = require("supertest");
-const app = require("../app");
-const db = require("../db/connection");
-const seed = require("../db/seeds/seed");
+const app = require("../app.js");
+const db = require("../db/connection.js");
+const seed = require("../db/seeds/seed.js");
 const data = require("../db/data/test-data/index.js");
 
 beforeEach(() => {
@@ -57,13 +57,13 @@ describe("/api/articles", () => {
         .get("/api/articles")
         .then(({ body: { articles } }) => {
           articles.forEach((article) => {
-            expect(typeof article.author).toBe("string");
-            expect(typeof article.title).toBe("string");
-            expect(typeof article.article_id).toBe("number");
-            expect(typeof article.topic).toBe("string");
-            expect(typeof article.created_at).toBe("string");
-            expect(typeof article.votes).toBe("number");
-            expect(typeof article.article_img_url).toBe("string");
+            expect(article.title).toBeString();
+            expect(article.topic).toBeString();
+            expect(article.author).toBeString();
+            expect(article.created_at).toBeString();
+            expect(article.votes).toBeNumber();
+            expect(article.article_id).toBeNumber();
+            expect(article.article_img_url).toBeString();
           });
         });
     });
@@ -116,16 +116,15 @@ describe("/api/articles/:article_id", () => {
       return request(app)
         .get("/api/articles/6")
         .expect(200)
-        .then(({ body }) => {
-          const { article } = body;
+        .then(({ body: { article } }) => {
           expect(article.article_id).toBe(6);
-          expect(typeof article.title).toBe("string");
-          expect(typeof article.topic).toBe("string");
-          expect(typeof article.author).toBe("string");
-          expect(typeof article.body).toBe("string");
-          expect(typeof article.created_at).toBe("string");
-          expect(typeof article.votes).toBe("number");
-          expect(typeof article.article_img_url).toBe("string");
+          expect(article.title).toBeString();
+          expect(article.topic).toBeString();
+          expect(article.author).toBeString();
+          expect(article.body).toBeString();
+          expect(article.created_at).toBeString();
+          expect(article.votes).toBeNumber();
+          expect(article.article_img_url).toBeString();
         });
     });
     test("404: Responds with a message when passed a valid but non-existent article_id", () => {
@@ -134,6 +133,72 @@ describe("/api/articles/:article_id", () => {
         .expect(404)
         .then(({ body }) => {
           expect(body.msg).toBe("Article not found!");
+        });
+    });
+  });
+  describe("PATCH", () => {
+    test("200: Responds with updated article with the given id", () => {
+      return request(app)
+        .patch("/api/articles/3")
+        .send({ inc_votes: 1 })
+        .expect(200)
+        .then(({ body: { updatedArticle } }) => {
+          expect(updatedArticle.article_id).toBe(3);
+          expect(updatedArticle.title).toBeString();
+          expect(updatedArticle.topic).toBeString();
+          expect(updatedArticle.author).toBeString();
+          expect(updatedArticle.body).toBeString();
+          expect(updatedArticle.created_at).toBeString();
+          expect(updatedArticle.votes).toBeNumber();
+          expect(updatedArticle.article_img_url).toBeString();
+        });
+    });
+    test("200: The updated article will have updated number of votes accoding to the the inc_votes propery in the input object", () => {
+      return request(app)
+        .get("/api/articles/3")
+        .then(
+          ({
+            body: {
+              article: { votes },
+            },
+          }) => {
+            const existingVotes = votes;
+            return request(app)
+              .patch("/api/articles/3")
+              .send({ inc_votes: 1 })
+              .expect(200)
+              .then(({ body: { updatedArticle } }) => {
+                console.log(updatedArticle.votes);
+                expect(updatedArticle.votes).toBe(existingVotes + 1);
+              });
+          },
+        );
+    });
+    test("400: Responds with a 400 error message if the input object doesn't include property of inc_votes", () => {
+      return request(app)
+        .patch("/api/articles/1")
+        .send({ randomeStuff: 1 })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Need to includ 'inc_votes' in input");
+        });
+    });
+    test("400: Responds with a 400 error message if the input isn't an object ", () => {
+      return request(app)
+        .patch("/api/articles/1")
+        .send(null)
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Input needs to be an object");
+        });
+    });
+    test("404: Responds with a 404 error message if the article with given id does not exist", () => {
+      return request(app)
+        .patch("/api/articles/3000")
+        .send({ inc_votes: 1 })
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Article Not Found!");
         });
     });
   });

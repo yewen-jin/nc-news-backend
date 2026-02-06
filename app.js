@@ -8,6 +8,7 @@ const {
   genericErrorHandler,
   invalidPathsHandler,
 } = require("./errors/error-handler");
+const InvalidInputError = require("./errors/invalid-input-error");
 
 const app = express();
 
@@ -27,8 +28,10 @@ app.all("{*path}", invalidPathsHandler);
 // if there are any errors in the middle of the above functions, using next(err) will pass the err object into the next middleware function
 app.use((err, req, res, next) => {
   if (err instanceof NotFoundError) {
-    console.log("404 error: ", err);
+    // console.log("404 error: ", err);
     res.status(404).send({ msg: err.message });
+  } else if (err instanceof InvalidInputError) {
+    res.status(400).send({ msg: err.message });
   } else {
     next(err);
   }

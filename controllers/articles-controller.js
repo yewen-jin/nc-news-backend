@@ -5,6 +5,8 @@ const {
   postComment: postCommentService,
   patchArticleById: patchArticleByIdService,
 } = require("../services/articles-services");
+const InValidInputError = require("../errors/invalid-input-error");
+const InvalidInputError = require("../errors/invalid-input-error");
 
 exports.getAllArticles = (req, res) => {
   return getAllArticlesService().then((articles) => {
@@ -19,8 +21,6 @@ exports.getArticleById = (req, res, next) => {
       res.status(200).send({ article });
     })
     .catch((err) => {
-      // console.log("error in controller: ", err);
-      // res.status(404).send({ msg: err.message });
       next(err);
     });
 };
@@ -44,7 +44,7 @@ exports.postComment = (req, res, next) => {
       res.status(201).send({ comment });
     })
     .catch((err) => {
-      console.log("controller error: ", err);
+      // console.log("controller error: ", err);
       next(err);
     });
 };
@@ -52,11 +52,19 @@ exports.postComment = (req, res, next) => {
 exports.patchArticleById = (req, res, next) => {
   const { article_id } = req.params;
   const updates = req.body;
+  if (typeof updates !== "object" || Array.isArray(updates)) {
+    throw new InvalidInputError("Input needs to be an object");
+  } else if (updates.inc_votes === undefined) {
+    throw new InvalidInputError("Need to includ 'inc_votes' in input");
+  }
+  // console.log(updates);
   return patchArticleByIdService(article_id, updates)
-    .then((updatedContent) => {
-      res.status(201).send({ updatedContent });
+    .then((updatedArticle) => {
+      console.log({ updatedArticle });
+      res.status(200).send({ updatedArticle });
     })
     .catch((err) => {
+      console.log("controller level error");
       next(err);
     });
 };

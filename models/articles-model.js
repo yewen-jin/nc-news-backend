@@ -31,17 +31,34 @@ exports.insertComment = (articleId, newComment) => {
       [articleId, newComment.username, newComment.body],
     )
     .then(({ rows }) => rows[0]);
-  // .catch((err) => {
-  // console.log("error in inserting comment:", err);
-  // }
-  // );
 };
 
 exports.checkIfArticleExists = (articleId) => {
   return db
     .query("SELECT * FROM articles WHERE article_id = $1", [articleId])
     .then(({ rows }) => {
-      // console.log("checking if article exists: ", rows.length);
       return rows.length === 1;
+    });
+};
+
+exports.updateArticle = (articleId, updates) => {
+  return db
+    .query("SELECT votes FROM articles WHERE article_id = $1;", [articleId])
+    .then(({ rows }) => {
+      console.log("existing votes:", rows[0].votes);
+      return rows[0].votes;
+    })
+    .then((existingVotes) => {
+      const newVote = existingVotes + updates.inc_votes;
+      console.log("new votes:", newVote);
+      return db
+        .query(
+          "UPDATE articles SET votes = $1 WHERE article_id = $2 RETURNING *;",
+          [newVote, articleId],
+        )
+        .then(({ rows }) => {
+          console.log("after update", rows[0]);
+          return rows[0];
+        });
     });
 };
