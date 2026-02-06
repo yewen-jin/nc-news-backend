@@ -4,11 +4,11 @@ const articlesRouter = require("./routes/articles-routes");
 const usersRouter = require("./routes/users-routes");
 const commentsRouter = require("./routes/comments-routes");
 const NotFoundError = require("./errors/not-found-error");
+const InvalidInputError = require("./errors/invalid-input-error");
 const {
   genericErrorHandler,
   invalidPathsHandler,
 } = require("./errors/error-handler");
-const InvalidInputError = require("./errors/invalid-input-error");
 
 const app = express();
 

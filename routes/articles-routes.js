@@ -1,5 +1,5 @@
 const express = require("express");
-const { handleInvalidMethods } = require("../controllers/controller");
+const { invalidMethodsHandler } = require("../errors/error-handler");
 const {
   getAllArticles,
   getArticleById,
@@ -10,20 +10,20 @@ const {
 
 const router = express.Router();
 
-router.route("/").get(getAllArticles).all(handleInvalidMethods);
+router.route("/").get(getAllArticles).all(invalidMethodsHandler);
 // router.get("/", getAllArticles);
-// router.delete("/", handleInvalidMethod);
+// router.delete("/", invalidMethodHandler);
 
 router
   .route("/:article_id")
   .get(getArticleById)
   .patch(patchArticleById)
-  .all(handleInvalidMethods);
+  .all(invalidMethodsHandler);
 
 router
   .route("/:article_id/comments")
   .get(getCommentsByArticleId)
   .post(postComment)
-  .all(handleInvalidMethods);
+  .all(invalidMethodsHandler);
 
 module.exports = router;

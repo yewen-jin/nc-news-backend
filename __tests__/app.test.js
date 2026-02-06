@@ -4,13 +4,8 @@ const db = require("../db/connection.js");
 const seed = require("../db/seeds/seed.js");
 const data = require("../db/data/test-data/index.js");
 
-beforeEach(() => {
-  return seed(data);
-});
-
-afterAll(() => {
-  return db.end();
-});
+beforeEach(() => seed(data));
+afterAll(() => db.end());
 
 describe("Invalid Enpoint", () => {
   test("404: Responds with a message when path is not found", () => {
@@ -168,7 +163,6 @@ describe("/api/articles/:article_id", () => {
               .send({ inc_votes: 1 })
               .expect(200)
               .then(({ body: { updatedArticle } }) => {
-                console.log(updatedArticle.votes);
                 expect(updatedArticle.votes).toBe(existingVotes + 1);
               });
           },

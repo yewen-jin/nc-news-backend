@@ -60,11 +60,11 @@ exports.patchArticleById = (req, res, next) => {
   // console.log(updates);
   return patchArticleByIdService(article_id, updates)
     .then((updatedArticle) => {
-      console.log({ updatedArticle });
+      // console.log({ updatedArticle });
       res.status(200).send({ updatedArticle });
     })
     .catch((err) => {
-      console.log("controller level error");
+      // console.log("controller level error");
       next(err);
     });
 };
