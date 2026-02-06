@@ -181,7 +181,12 @@ describe("/api/articles/:article_id/comments", () => {
         .send({ username: "butter_bridge", body: "fds" })
         .expect(201)
         .then(({ body: { comment } }) => {
+          expect(comment.comment_id).toBeNumber();
+          expect(comment.article_id).toBeNumber();
+          expect(comment.votes).toBeNumber();
           expect(comment.body).toBeString();
+          expect(comment.author).toBeString();
+          expect(comment.created_at).toBeString();
         });
     });
     test("404: Responds with an error message when the article doesn't exist", () => {});
