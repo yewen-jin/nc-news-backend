@@ -19,6 +19,7 @@ app.use(express.json());
 app.use("/api/topics", topicsRouter);
 app.use("/api/articles", articlesRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/comments", commentsRouter);
 
 // INVALID PATHS
 // Errors in the previous function wouldn't go into this catch app path function because next(err) contains one argument, and it will go to the next middleware function that has 4 arguments, whereas this one has 3

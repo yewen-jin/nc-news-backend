@@ -11,8 +11,6 @@ const {
 const router = express.Router();
 
 router.route("/").get(getAllArticles).all(invalidMethodsHandler);
-// router.get("/", getAllArticles);
-// router.delete("/", invalidMethodHandler);
 
 router
   .route("/:article_id")

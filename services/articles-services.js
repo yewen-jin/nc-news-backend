@@ -54,7 +54,7 @@ exports.patchArticleById = (articleId, updates) => {
       return updatedArticle;
     })
     .catch((err) => {
-      console.log("patching article error:", err);
+      // console.log("patching article error:", err);
       // if the article is not found, the first sql query which tries to return existing vote will return nothing,
       // The error is generated when trying to read votes property from undefined
       // the error is caught here

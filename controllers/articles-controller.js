@@ -5,7 +5,6 @@ const {
   postComment: postCommentService,
   patchArticleById: patchArticleByIdService,
 } = require("../services/articles-services");
-const InValidInputError = require("../errors/invalid-input-error");
 const InvalidInputError = require("../errors/invalid-input-error");
 
 exports.getAllArticles = (req, res) => {

@@ -79,6 +79,7 @@ describe("/api/articles", () => {
         });
     });
   });
+
   describe("INVALID METHODS", () => {
     test("405: Responds with message for invalid method", () => {
       //the .post() .put() ... are replaced by [method] when method is the variable name that contains literal values of these method strings
@@ -264,6 +265,20 @@ describe("/api/articles/:article_id/comments", () => {
         .expect(404)
         .then(({ body }) => {
           expect(body.msg).toBe("Article Not Found!");
+        });
+    });
+  });
+});
+
+describe("/api/comments/:comment_id", () => {
+  describe("GET", () => {});
+  describe("DELETE", () => {
+    test("204: Responds with 204 status code if successfully deleted comment, and the comment with the specific id should be deleted", () => {
+      return request(app)
+        .delete("/api/comments/1")
+        .expect(204)
+        .then(() => {
+          db.query("SELECT comment_id FROM comments WHERE comment_id = 1");
         });
     });
   });
