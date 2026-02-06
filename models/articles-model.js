@@ -1,9 +1,28 @@
 const db = require("../db/connection");
+const { sort } = require("../db/data/test-data/articles");
+const InvalidInputError = require("../errors/invalid-input-error");
 
-exports.fetchAllArticles = () => {
-  return db
-    .query(
-      `SELECT 
+exports.fetchAllArticles = (sort_by = "created_at", order = "desc") => {
+  const validSortColumn = [
+    "author",
+    "title",
+    "article_id",
+    "topic",
+    "created_at",
+    "votes",
+  ];
+  const validOrders = ["asc", "desc"];
+  if (
+    !validSortColumn.includes(sort_by.toLowerCase()) ||
+    !validOrders.includes(order.toLowerCase())
+  ) {
+    throw new InvalidInputError(
+      `Invalid query input. Valid input for "sort_by" includes: author, title, article_id, topic, created_at, and votes`,
+    );
+  } else {
+    return db
+      .query(
+        `SELECT 
         articles.author, 
         articles.title, 
         articles.article_id, 
@@ -16,9 +35,10 @@ exports.fetchAllArticles = () => {
       LEFT JOIN comments 
       ON articles.article_id = comments.article_id 
       GROUP BY articles.article_id 
-      ORDER BY articles.created_at DESC;`,
-    )
-    .then(({ rows }) => rows);
+      ORDER BY ${sort_by} ${order};`,
+      )
+      .then(({ rows }) => rows);
+  }
 };
 
 exports.fetchArticleById = (articleId) => {

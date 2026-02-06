@@ -71,11 +71,35 @@ describe("/api/articles", () => {
           });
         });
     });
-    test("200: the articles should be sorted in descending order of creation date", () => {
+    test("200: the articles should by default be sorted in descending order of creation date", () => {
       return request(app)
         .get("/api/articles")
         .then(({ body: { articles } }) => {
           expect(articles).toBeSortedBy("created_at", { descending: true });
+        });
+    });
+    test("200: the articles should include a query parameter called sort_by, and the response will be sorted by the given sort_by argument", () => {
+      return request(app)
+        .get("/api/articles?sort_by=title")
+        .then(({ body: { articles } }) => {
+          expect(articles).toBeSortedBy("title", { descending: true });
+        });
+    });
+    test("200: the articles should include a query parameter called order which should be either ASC or DSC, and the response will be sorted by respective order", () => {
+      return request(app)
+        .get("/api/articles?order=asc")
+        .then(({ body: { articles } }) => {
+          expect(articles).toBeSortedBy("created_at", { descending: false });
+        });
+    });
+    test("400: if the query argument is not one of the columns or if the order argument is not either 'asc' or 'desc', return a 400 error message saying the query input is invalid", () => {
+      return request(app)
+        .get("/api/articles?order=assfa")
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe(
+            `Invalid query input. Valid input for "sort_by" includes: author, title, article_id, topic, created_at, and votes`,
+          );
         });
     });
   });
