@@ -1,4 +1,3 @@
-const { sort } = require("../db/data/test-data/articles");
 const InvalidInputError = require("../errors/invalid-input-error");
 const NotFoundError = require("../errors/not-found-error");
 const {
@@ -12,14 +11,11 @@ const {
 
 exports.getAllArticles = (sort_by, order) => {
   return fetchAllArticles(sort_by, order).then((sortedList) => {
-    console.log(sortedList);
     if (sortedList === null) {
-      console.log("get error");
       throw new InvalidInputError(
         `Invalid query input. Valid input for "sort_by" includes: author, title, article_id, topic, created_at, and votes`,
       );
     } else {
-      console.log("not get error");
       return sortedList;
     }
   });

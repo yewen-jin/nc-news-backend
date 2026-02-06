@@ -143,8 +143,9 @@ describe("/api/articles/:article_id", () => {
           expect(article.author).toBeString();
           expect(article.body).toBeString();
           expect(article.created_at).toBeString();
-          expect(article.votes).toBeNumber();
           expect(article.article_img_url).toBeString();
+          expect(article.votes).toBeNumber();
+          expect(article.comment_count).toBeNumber();
         });
     });
     test("404: Responds with a message when passed a valid but non-existent article_id", () => {
@@ -169,8 +170,8 @@ describe("/api/articles/:article_id", () => {
           expect(updatedArticle.author).toBeString();
           expect(updatedArticle.body).toBeString();
           expect(updatedArticle.created_at).toBeString();
-          expect(updatedArticle.votes).toBeNumber();
           expect(updatedArticle.article_img_url).toBeString();
+          expect(updatedArticle.votes).toBeNumber();
         });
     });
     test("200: The updated article will have updated number of votes accoding to the the inc_votes propery in the input object", () => {
@@ -233,11 +234,11 @@ describe("/api/articles/:article_id/comments", () => {
           const { comments } = body;
           comments.forEach((comment) => {
             expect(comment.article_id).toBe(3);
-            expect(typeof comment.comment_id).toBe("number");
-            expect(typeof comment.body).toBe("string");
-            expect(typeof comment.votes).toBe("number");
-            expect(typeof comment.body).toBe("string");
-            expect(typeof comment.created_at).toBe("string");
+            expect(comment.comment_id).toBeNumber();
+            expect(comment.votes).toBeNumber();
+            expect(comment.body).toBeString();
+            expect(comment.body).toBeString();
+            expect(comment.created_at).toBeString();
           });
         });
     });
