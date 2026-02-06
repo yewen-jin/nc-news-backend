@@ -285,6 +285,14 @@ describe("/api/comments/:comment_id", () => {
           );
         });
     });
+    test("404: Responds with a 404 error message if the comment_id does not exist", () => {
+      return request(app)
+        .delete("/api/comments/35")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Comment doesn't exist!");
+        });
+    });
   });
 });
 
