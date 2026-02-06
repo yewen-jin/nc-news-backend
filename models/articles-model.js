@@ -1,5 +1,4 @@
 const db = require("../db/connection");
-const { sort } = require("../db/data/test-data/articles");
 const InvalidInputError = require("../errors/invalid-input-error");
 
 exports.fetchAllArticles = (sort_by = "created_at", order = "desc", topic) => {
@@ -20,7 +19,7 @@ exports.fetchAllArticles = (sort_by = "created_at", order = "desc", topic) => {
       `Invalid query input. Valid input for "sort_by" includes: author, title, article_id, topic, created_at, and votes`,
     );
   } else if (topic !== undefined) {
-    console.log(topic);
+    // console.log(topic);
     return db
       .query(
         `SELECT
@@ -107,14 +106,6 @@ exports.insertComment = (articleId, newComment) => {
     .then(({ rows }) => rows[0]);
 };
 
-exports.checkIfArticleExists = (articleId) => {
-  return db
-    .query(`SELECT * FROM articles WHERE article_id = $1`, [articleId])
-    .then(({ rows }) => {
-      return rows.length === 1;
-    });
-};
-
 exports.updateArticle = (articleId, updates) => {
   return db
     .query(`SELECT votes FROM articles WHERE article_id = $1;`, [articleId])
@@ -131,5 +122,21 @@ exports.updateArticle = (articleId, updates) => {
         .then(({ rows }) => {
           return rows[0];
         });
+    });
+};
+
+exports.checkIfArticleExists = (articleId) => {
+  return db
+    .query(`SELECT * FROM articles WHERE article_id = $1`, [articleId])
+    .then(({ rows }) => {
+      return rows.length === 1;
+    });
+};
+
+exports.checkIfTopicExists = (topic) => {
+  return db
+    .query(`SELECT * FROM topics WHERE slug = $1`, [topic])
+    .then(({ rows }) => {
+      return rows.length === 1;
     });
 };

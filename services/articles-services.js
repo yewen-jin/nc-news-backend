@@ -7,17 +7,25 @@ const {
   insertComment,
   checkIfArticleExists,
   updateArticle,
+  checkIfTopicExists,
 } = require("../models/articles-model");
 
 exports.getAllArticles = (sort_by, order, topic) => {
-  return fetchAllArticles(sort_by, order, topic).then((sortedList) => {
-    console.log(sortedList);
-    if (sortedList.length === 0) {
-      throw new InvalidInputError("Topic does not exist!");
-    } else {
+  if (!topic) {
+    return fetchAllArticles(sort_by, order, topic).then((sortedList) => {
       return sortedList;
-    }
-  });
+    });
+  } else {
+    return checkIfTopicExists(topic).then((articleExists) => {
+      if (!articleExists) {
+        throw new NotFoundError("Topic does not exist!");
+      } else {
+        return fetchAllArticles(sort_by, order, topic).then((sortedList) => {
+          return sortedList;
+        });
+      }
+    });
+  }
 };
 
 exports.getArticleById = (articleId) => {
