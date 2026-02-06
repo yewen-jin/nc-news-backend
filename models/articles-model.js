@@ -35,3 +35,12 @@ exports.insertComment = (articleId, newComment) => {
     return { err: "insert comment error" };
   }
 };
+
+exports.checkIfArticleExists = (articleId) => {
+  return db
+    .query("SELECT * FROM articles WHERE article_id = $1", [articleId])
+    .then(({ rows }) => {
+      // console.log("checking if article exists: ", rows.length);
+      return rows.length === 1;
+    });
+};

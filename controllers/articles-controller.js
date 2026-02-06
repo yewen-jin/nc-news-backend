@@ -38,8 +38,8 @@ exports.getCommentsByArticleId = (req, res, next) => {
 exports.postComment = (req, res, next) => {
   const { article_id } = req.params;
   const newComment = req.body;
-  console.log(req);
-  console.log("new comment: ", newComment);
+  // console.log(req);
+  // console.log("new comment: ", newComment);
   //newComment contains .username and .body properties
   return postCommentService(article_id, newComment)
     .then((comment) => {

@@ -4,6 +4,7 @@ const {
   fetchArticleById,
   fetchCommentsByArticleId,
   insertComment,
+  checkIfArticleExists,
 } = require("../models/articles-model");
 
 exports.getAllArticles = () => fetchAllArticles();
@@ -19,15 +20,19 @@ exports.getArticleById = (articleId) => {
 };
 
 exports.getCommentsByArticleId = (articleId) => {
-  return fetchCommentsByArticleId(articleId).then((comments) => {
-    //is there a way to check if the article doesn't exist or if it exists but doesn't have any comments?
-    if ("") {
-    }
-    // The article_id exists but comments count is 0
-    else if (comments.length === 0) {
-      throw new NotFoundError("Comments not found");
+  return checkIfArticleExists(articleId).then((isArticleTrue) => {
+    if (isArticleTrue === false) {
+      console.log("article does not exist");
+      throw new NotFoundError("Article does not exist");
     } else {
-      return comments;
+      return fetchCommentsByArticleId(articleId).then((comments) => {
+        if (comments.length === 0) {
+          console.log("comments not found");
+          throw new NotFoundError("Comments not found");
+        } else {
+          return comments;
+        }
+      });
     }
   });
 };

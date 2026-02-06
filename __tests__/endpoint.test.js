@@ -171,12 +171,12 @@ describe("/api/articles/:article_id/comments", () => {
         .get("/api/articles/300/comments")
         .expect(404)
         .then(({ body }) => {
-          expect(body.msg).toBe("Comments not found");
+          expect(body.msg).toBe("Article does not exist");
         });
     });
     test("404: Responds with a message when there is no comments with this article", () => {
       return request(app)
-        .get("/api/articles/37/comments")
+        .get("/api/articles/4/comments")
         .expect(404)
         .then(({ body }) => {
           expect(body.msg).toBe("Comments not found");
@@ -187,7 +187,7 @@ describe("/api/articles/:article_id/comments", () => {
     test("201: Responds with a confirmation message with added comment upon correct format of input object", () => {
       return request(app)
         .post("/api/articles/3/comments")
-        .send({ username: "butter_bridge", body: "fds" })
+        .send({ username: "butter_bridge", body: "a new comment" })
         .expect(201)
         .then(({ body: { comment } }) => {
           expect(comment.comment_id).toBeNumber();
