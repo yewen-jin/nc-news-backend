@@ -8,9 +8,9 @@ const {
 const InvalidInputError = require("../errors/invalid-input-error");
 
 exports.getAllArticles = (req, res) => {
-  const { sort_by, order } = req.query;
+  const { sort_by, order, topic } = req.query;
 
-  return getAllArticlesService(sort_by, order).then((articles) => {
+  return getAllArticlesService(sort_by, order, topic).then((articles) => {
     res.status(200).send({ articles });
   });
 };

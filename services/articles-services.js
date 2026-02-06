@@ -9,12 +9,11 @@ const {
   updateArticle,
 } = require("../models/articles-model");
 
-exports.getAllArticles = (sort_by, order) => {
-  return fetchAllArticles(sort_by, order).then((sortedList) => {
-    if (sortedList === null) {
-      throw new InvalidInputError(
-        `Invalid query input. Valid input for "sort_by" includes: author, title, article_id, topic, created_at, and votes`,
-      );
+exports.getAllArticles = (sort_by, order, topic) => {
+  return fetchAllArticles(sort_by, order, topic).then((sortedList) => {
+    console.log(sortedList);
+    if (sortedList.length === 0) {
+      throw new InvalidInputError("Topic does not exist!");
     } else {
       return sortedList;
     }

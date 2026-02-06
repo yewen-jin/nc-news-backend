@@ -92,6 +92,15 @@ describe("/api/articles", () => {
           expect(articles).toBeSortedBy("created_at", { descending: false });
         });
     });
+    test("200: Response with only articles with the given topic if a topic argument is given", () => {
+      return request(app)
+        .get("/api/articles?topic=cats")
+        .then(({ body: { articles } }) => {
+          articles.forEach((article) => {
+            expect(article.topic).toBe("cats");
+          });
+        });
+    });
     test("400: if the query argument is not one of the columns or if the order argument is not either 'asc' or 'desc', return a 400 error message saying the query input is invalid", () => {
       return request(app)
         .get("/api/articles?order=assfa")
@@ -100,6 +109,14 @@ describe("/api/articles", () => {
           expect(body.msg).toBe(
             `Invalid query input. Valid input for "sort_by" includes: author, title, article_id, topic, created_at, and votes`,
           );
+        });
+    });
+    test("404: if the queried topic does not exist, return a 404 error message saying the input is invalid", () => {
+      return request(app)
+        .get("/api/articles?topic=duck")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Topic does not exist!");
         });
     });
   });

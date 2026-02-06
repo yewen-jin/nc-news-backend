@@ -2,7 +2,7 @@ const db = require("../db/connection");
 const { sort } = require("../db/data/test-data/articles");
 const InvalidInputError = require("../errors/invalid-input-error");
 
-exports.fetchAllArticles = (sort_by = "created_at", order = "desc") => {
+exports.fetchAllArticles = (sort_by = "created_at", order = "desc", topic) => {
   const validSortColumn = [
     "author",
     "title",
@@ -19,6 +19,29 @@ exports.fetchAllArticles = (sort_by = "created_at", order = "desc") => {
     throw new InvalidInputError(
       `Invalid query input. Valid input for "sort_by" includes: author, title, article_id, topic, created_at, and votes`,
     );
+  } else if (topic !== undefined) {
+    console.log(topic);
+    return db
+      .query(
+        `SELECT
+        articles.author,
+        articles.title,
+        articles.article_id,
+        articles.topic,
+        articles.created_at,
+        articles.votes,
+        articles.article_img_url,
+        COUNT(comments.comment_id)::INT AS comment_count
+      FROM articles
+      LEFT JOIN comments
+      ON articles.article_id = comments.article_id
+      WHERE articles.topic = $1
+      GROUP BY articles.article_id
+      ORDER BY ${sort_by} ${order};
+      `,
+        [topic],
+      )
+      .then(({ rows }) => rows);
   } else {
     return db
       .query(
@@ -35,7 +58,8 @@ exports.fetchAllArticles = (sort_by = "created_at", order = "desc") => {
       LEFT JOIN comments 
       ON articles.article_id = comments.article_id 
       GROUP BY articles.article_id 
-      ORDER BY ${sort_by} ${order};`,
+      ORDER BY ${sort_by} ${order};
+      `,
       )
       .then(({ rows }) => rows);
   }
