@@ -157,7 +157,7 @@ describe("/api/articles/:article_id/comments", () => {
           });
         });
     });
-    test("404: Responds with a message when the article doesn't exist or there is no comments with this article", () => {
+    test("404: Responds with a message when the article doesn't exis", () => {
       return request(app)
         .get("/api/articles/300/comments")
         .expect(404)
@@ -165,9 +165,26 @@ describe("/api/articles/:article_id/comments", () => {
           expect(body.msg).toBe("Comments not found");
         });
     });
+    test("404: Responds with a message when there is no comments with this article", () => {
+      return request(app)
+        .get("/api/articles/37/comments")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Comments not found");
+        });
+    });
   });
   describe("POST", () => {
-    test("201: Responds with a confirmation message with added comment", () => {});
+    test("201: Responds with a confirmation message with added comment upon correct format of input object", () => {
+      return request(app)
+        .post("/api/articles/3/comments")
+        .send({ username: "butter_bridge", body: "fds" })
+        .expect(201)
+        .then(({ body: { comment } }) => {
+          expect(comment.body).toBeString();
+        });
+    });
+    test("404: Responds with an error message when the article doesn't exist", () => {});
   });
 });
 

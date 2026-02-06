@@ -3,6 +3,7 @@ const {
   fetchAllArticles,
   fetchArticleById,
   fetchCommentsByArticleId,
+  insertComment,
 } = require("../models/articles-model");
 
 exports.getAllArticles = () => fetchAllArticles();
@@ -25,5 +26,11 @@ exports.getCommentsByArticleId = (articleId) => {
     } else {
       return comments;
     }
+  });
+};
+
+exports.postComment = (articleId, newComment) => {
+  return insertComment(articleId, newComment).then((comment) => {
+    return comment;
   });
 };

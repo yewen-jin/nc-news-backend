@@ -4,7 +4,7 @@ const {
   getAllArticles,
   getArticleById,
   getCommentsByArticleId,
-  postCommentForArticleById,
+  postComment,
 } = require("../controllers/articles-controller");
 
 const router = express.Router();
@@ -13,10 +13,12 @@ router.route("/").get(getAllArticles).all(handleInvalidMethods);
 // router.get("/", getAllArticles);
 // router.delete("/", handleInvalidMethod);
 
-router.get("/:article_id", getArticleById);
+router.route("/:article_id").get(getArticleById).all(handleInvalidMethods);
 
-router.get("/:article_id/comments", getCommentsByArticleId);
-
-router.post("/:article_id", postCommentForArticleById);
+router
+  .route("/:article_id/comments")
+  .get(getCommentsByArticleId)
+  .post(postComment)
+  .all(handleInvalidMethods);
 
 module.exports = router;

@@ -2,7 +2,7 @@ const {
   getAllArticles: getAllArticlesService,
   getArticleById: getArticleByIdService,
   getCommentsByArticleId: getCommentsByArticleIdService,
-  postCommentForArticleById: postCommentForArticleByIdService,
+  postComment: postCommentService,
 } = require("../services/articles-services");
 
 exports.getAllArticles = (req, res) => {
@@ -31,18 +31,22 @@ exports.getCommentsByArticleId = (req, res, next) => {
       res.status(200).send({ comments });
     })
     .catch((err) => {
-      // console.log("error in controller:", err);
       next(err);
     });
 };
 
-exports.postCommentForArticleById = (req, res, next) => {
+exports.postComment = (req, res, next) => {
   const { article_id } = req.params;
-  return postCommentsForArticle(article_id)
-    .then((addedComments) => {
-      res.status(201).send({ addedComments });
+  const newComment = req.body;
+  console.log(req);
+  console.log("new comment: ", newComment);
+  //newComment contains .username and .body properties
+  return postCommentService(article_id, newComment)
+    .then((comment) => {
+      res.status(201).send({ comment });
     })
     .catch((err) => {
+      console.log("error in controller:", err);
       next(err);
     });
 };

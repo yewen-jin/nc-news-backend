@@ -17,8 +17,21 @@ exports.fetchArticleById = (articleId) => {
 exports.fetchCommentsByArticleId = (articleId) => {
   return db
     .query(
-      "SELECT * FROM comments WHERE article_id = $1 ORDER BY created_at DESC",
+      "SELECT * FROM comments WHERE article_id = $1 ORDER BY created_at DESC;",
       [articleId],
     )
     .then(({ rows }) => rows);
+};
+
+exports.insertComment = (articleId, newComment) => {
+  try {
+    return db
+      .query(
+        "INSERT INTO comments(article_id, author, body) VALUES($1, $2, $3) RETURNING*;",
+        [articleId, newComment.username, newComment.body],
+      )
+      .then(({ rows }) => rows[0]);
+  } catch {
+    return { err: "insert comment error" };
+  }
 };
