@@ -5,6 +5,7 @@ const {
   getArticleById,
   getCommentsByArticleId,
   postComment,
+  patchArticleById,
 } = require("../controllers/articles-controller");
 
 const router = express.Router();
@@ -13,7 +14,11 @@ router.route("/").get(getAllArticles).all(handleInvalidMethods);
 // router.get("/", getAllArticles);
 // router.delete("/", handleInvalidMethod);
 
-router.route("/:article_id").get(getArticleById).all(handleInvalidMethods);
+router
+  .route("/:article_id")
+  .get(getArticleById)
+  .patch(patchArticleById)
+  .all(handleInvalidMethods);
 
 router
   .route("/:article_id/comments")

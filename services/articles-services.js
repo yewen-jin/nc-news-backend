@@ -26,19 +26,26 @@ exports.getCommentsByArticleId = (articleId) => {
       throw new NotFoundError("Article does not exist");
     } else {
       return fetchCommentsByArticleId(articleId).then((comments) => {
-        if (comments.length === 0) {
-          console.log("comments not found");
-          throw new NotFoundError("Comments not found");
-        } else {
-          return comments;
-        }
+        // if (comments.length === 0) {
+        //   console.log("comments not found");
+        //   throw new NotFoundError("There is no comment in this article");
+        // } else {
+        return comments;
+        // }
       });
     }
   });
 };
 
 exports.postComment = (articleId, newComment) => {
-  return insertComment(articleId, newComment).then((comment) => {
-    return comment;
-  });
+  return insertComment(articleId, newComment)
+    .then((comment) => {
+      return comment;
+    })
+    .catch((err) => {
+      console.log("service layer:", err);
+      throw new NotFoundError("Article Not Found!");
+    });
 };
+
+exports.patchArticleById = (articleId, updates) => {};

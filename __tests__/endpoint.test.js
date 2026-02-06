@@ -174,14 +174,14 @@ describe("/api/articles/:article_id/comments", () => {
           expect(body.msg).toBe("Article does not exist");
         });
     });
-    test("404: Responds with a message when there is no comments with this article", () => {
-      return request(app)
-        .get("/api/articles/4/comments")
-        .expect(404)
-        .then(({ body }) => {
-          expect(body.msg).toBe("Comments not found");
-        });
-    });
+    // test("404: Responds with a message when there is no comments with this article", () => {
+    //   return request(app)
+    //     .get("/api/articles/4/comments")
+    //     .expect(404)
+    //     .then(({ body }) => {
+    //       expect(body.msg).toBe("Comments not found");
+    //     });
+    // });
   });
   describe("POST", () => {
     test("201: Responds with a confirmation message with added comment upon correct format of input object", () => {
@@ -190,15 +190,23 @@ describe("/api/articles/:article_id/comments", () => {
         .send({ username: "butter_bridge", body: "a new comment" })
         .expect(201)
         .then(({ body: { comment } }) => {
+          expect(comment.article_id).toBe(3);
           expect(comment.comment_id).toBeNumber();
-          expect(comment.article_id).toBeNumber();
           expect(comment.votes).toBeNumber();
           expect(comment.body).toBeString();
           expect(comment.author).toBeString();
           expect(comment.created_at).toBeString();
         });
     });
-    test("404: Responds with an error message when the article doesn't exist", () => {});
+    test("404: Responds with an error message when the article doesn't exist", () => {
+      return request(app)
+        .post("/api/articles/300/comments")
+        .send({ username: "butter_bridge", body: "a new comment" })
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Article Not Found!");
+        });
+    });
   });
 });
 

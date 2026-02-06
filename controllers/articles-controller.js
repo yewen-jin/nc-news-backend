@@ -3,6 +3,7 @@ const {
   getArticleById: getArticleByIdService,
   getCommentsByArticleId: getCommentsByArticleIdService,
   postComment: postCommentService,
+  patchArticleById: patchArticleByIdService,
 } = require("../services/articles-services");
 
 exports.getAllArticles = (req, res) => {
@@ -38,15 +39,24 @@ exports.getCommentsByArticleId = (req, res, next) => {
 exports.postComment = (req, res, next) => {
   const { article_id } = req.params;
   const newComment = req.body;
-  // console.log(req);
-  // console.log("new comment: ", newComment);
-  //newComment contains .username and .body properties
   return postCommentService(article_id, newComment)
     .then((comment) => {
       res.status(201).send({ comment });
     })
     .catch((err) => {
-      console.log("error in controller:", err);
+      console.log("controller error: ", err);
+      next(err);
+    });
+};
+
+exports.patchArticleById = (req, res, next) => {
+  const { article_id } = req.params;
+  const updates = req.body;
+  return patchArticleByIdService(article_id, updates)
+    .then((updatedContent) => {
+      res.status(201).send({ updatedContent });
+    })
+    .catch((err) => {
       next(err);
     });
 };

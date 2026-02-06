@@ -1,4 +1,5 @@
 const db = require("../db/connection");
+const NotFoundError = require("../errors/not-found-error");
 
 exports.fetchAllArticles = () => {
   return db
@@ -24,16 +25,16 @@ exports.fetchCommentsByArticleId = (articleId) => {
 };
 
 exports.insertComment = (articleId, newComment) => {
-  try {
-    return db
-      .query(
-        "INSERT INTO comments(article_id, author, body) VALUES($1, $2, $3) RETURNING*;",
-        [articleId, newComment.username, newComment.body],
-      )
-      .then(({ rows }) => rows[0]);
-  } catch {
-    return { err: "insert comment error" };
-  }
+  return db
+    .query(
+      "INSERT INTO comments(article_id, author, body) VALUES($1, $2, $3) RETURNING*;",
+      [articleId, newComment.username, newComment.body],
+    )
+    .then(({ rows }) => rows[0]);
+  // .catch((err) => {
+  // console.log("error in inserting comment:", err);
+  // }
+  // );
 };
 
 exports.checkIfArticleExists = (articleId) => {
