@@ -217,7 +217,7 @@ describe("/api/articles/:article_id", () => {
         .send({ randomeStuff: 1 })
         .expect(400)
         .then(({ body }) => {
-          expect(body.msg).toBe("Need to includ 'inc_votes' in input");
+          expect(body.msg).toBe("Need to include 'inc_votes' in input");
         });
     });
     test("400: Responds with a 400 error message if the input isn't an object ", () => {

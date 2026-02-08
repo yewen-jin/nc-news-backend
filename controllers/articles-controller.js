@@ -56,7 +56,7 @@ exports.patchArticleById = (req, res, next) => {
   if (typeof updates !== "object" || Array.isArray(updates)) {
     throw new InvalidInputError("Input needs to be an object");
   } else if (updates.inc_votes === undefined) {
-    throw new InvalidInputError("Need to includ 'inc_votes' in input");
+    throw new InvalidInputError("Need to include 'inc_votes' in input");
   }
   // console.log(updates);
   return patchArticleByIdService(article_id, updates)
