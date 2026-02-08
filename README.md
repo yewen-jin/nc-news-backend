@@ -1,9 +1,10 @@
 # NC News Backend
 
 available endpoints:
-https://nc-news-backend-91qy.onrender.com/api/articles
-https://nc-news-backend-91qy.onrender.com/api/topics
-https://nc-news-backend-91qy.onrender.com/api/users
+[https://nc-news-backend-91qy.onrender.com/api/articles]
+[https://nc-news-backend-91qy.onrender.com/api/topics]
+[https://nc-news-backend-91qy.onrender.com/api/users]
+[https://nc-news-backend-91qy.onrender.com/api/ascii_animals]
 
 ### Connecting to a database
 
