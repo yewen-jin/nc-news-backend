@@ -10,7 +10,7 @@ if (ENV === "production") {
   config.connectionString = process.env.DATABASE_URL;
   config.max = 2;
   config.ssl = {
-    rejectUnauthorized: false, // 🛡️ Mandatory for Cloud-to-Cloud traffic
+    rejectUnauthorized: false, // Mandatory for Cloud-to-Cloud traffic
   };
 }
 
