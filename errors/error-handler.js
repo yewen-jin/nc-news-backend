@@ -1,4 +1,5 @@
 exports.genericErrorHandler = (err, req, res, next) => {
+  console.log("interla error: ", err);
   res.status(500).send({ msg: "Internal Error" });
 };
 
