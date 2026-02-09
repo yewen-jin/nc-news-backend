@@ -5,7 +5,6 @@
   "main": "listen.js",
   "scripts": {
     "setup-dbs": "psql -f ./db/setup-dbs.sql",
-    "seed-dev": "node ./db/seeds/run-seed.js",
     "test": "jest --runInBand",
     "prepare": "husky install",
     "start": "node listen.js",
