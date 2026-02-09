@@ -539,3 +539,26 @@ describe("/api/users", () => {
     });
   });
 });
+
+describe("/api/users/:username", () => {
+  describe("GET", () => {
+    test("200: Responds with a user object with the given username, which contains username, name and avatar_url properties", () => {
+      return request(app)
+        .get("/api/users/lurker")
+        .expect(200)
+        .then(({ body: { user } }) => {
+          expect(user.username).toBe("lurker");
+          expect(user.name).toBeString();
+          expect(user.avatar_url).toBeString();
+        });
+    });
+    test("404: Responds with a 404 error message if the given username parameter doesn't match an existing username", () => {
+      return request(app)
+        .get("/api/users/unknown")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe("The user doesn't exist");
+        });
+    });
+  });
+});
