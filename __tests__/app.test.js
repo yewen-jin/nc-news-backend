@@ -41,7 +41,7 @@ describe("/api/topics", () => {
       const invalidMethods = ["post", "patch", "put", "delete"].map(
         (method) => {
           return request(app)
-            [method]("/api/articles")
+            [method]("/api/topics")
             .expect(405)
             .then(({ body }) => {
               expect(body.msg).toBe("Invalid Methods!");
@@ -264,7 +264,7 @@ describe("/api/articles/:article_id", () => {
       //when using this, each of the method in the array needs to be responded with a 405
       const invalidMethods = ["post", "put", "delete"].map((method) => {
         return request(app)
-          [method]("/api/articles")
+          [method]("/api/articles/1")
           .expect(405)
           .then(({ body }) => {
             expect(body.msg).toBe("Invalid Methods!");
@@ -343,6 +343,8 @@ describe("/api/articles/:article_id/comments", () => {
           expect(body.msg).toBe("Article Not Found!");
         });
     });
+    test("400: Input object doesn't include necessary properties", () => {});
+    test("400: Input type is not an object", () => {});
   });
   describe("INVALID METHODS", () => {
     test("405: Responds with message for invalid method", () => {
@@ -350,7 +352,7 @@ describe("/api/articles/:article_id/comments", () => {
       //when using this, each of the method in the array needs to be responded with a 405
       const invalidMethods = ["patch", "put", "delete"].map((method) => {
         return request(app)
-          [method]("/api/articles")
+          [method]("/api/articles/1/comments")
           .expect(405)
           .then(({ body }) => {
             expect(body.msg).toBe("Invalid Methods!");
@@ -413,7 +415,7 @@ describe("/api/comments/:comment_id", () => {
       //when using this, each of the method in the array needs to be responded with a 405
       const invalidMethods = ["post", "put", "patch"].map((method) => {
         return request(app)
-          [method]("/api/articles")
+          [method]("/api/comments/1")
           .expect(405)
           .then(({ body }) => {
             expect(body.msg).toBe("Invalid Methods!");
@@ -448,7 +450,7 @@ describe("/api/users", () => {
       const invalidMethods = ["post", "put", "delete", "patch"].map(
         (method) => {
           return request(app)
-            [method]("/api/articles")
+            [method]("/api/users")
             .expect(405)
             .then(({ body }) => {
               expect(body.msg).toBe("Invalid Methods!");
