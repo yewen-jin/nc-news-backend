@@ -14,6 +14,7 @@ const app = express();
 
 app.use(express.json());
 
+app.use("/api", express.static("public"));
 // VALID PATHS
 // The middleware chain only go into any of these if the endpoint matches the argument string
 app.use("/api/topics", topicsRouter);
