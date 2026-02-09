@@ -1,11 +1,14 @@
 const { invalidMethodsHandler } = require("../errors/error-handler");
-const { deleteCommentById } = require("../controllers/comments-controller");
+const {
+  getCommentById,
+  deleteCommentById,
+} = require("../controllers/comments-controller");
 const express = require("express");
 const router = express.Router();
 
 router
   .route("/:comment_id")
-  // .get()
+  .get(getCommentById)
   .delete(deleteCommentById)
   .all(invalidMethodsHandler);
 

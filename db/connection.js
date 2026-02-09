@@ -6,6 +6,7 @@ console.log(`connected to environment: ${ENV}`);
 require("dotenv").config({ path: `${__dirname}/../.env.${ENV}` });
 
 const config = {};
+
 if (ENV === "production") {
   config.connectionString = process.env.DATABASE_URL;
   config.max = 2;
@@ -20,4 +21,4 @@ if (!process.env.PGDATABASE && !process.env.DATABASE_URL) {
   console.log(`Connected to ${process.env.PGDATABASE}`);
 }
 
-module.exports = new Pool(config);
+module.exports = ENV === "production" ? new Pool(config) : new Pool();

@@ -1,12 +1,20 @@
-# NC News Backend
+# NC News Back-end API
 
-available endpoints:
-[https://nc-news-backend-91qy.onrender.com/api/articles]
-[https://nc-news-backend-91qy.onrender.com/api/topics]
-[https://nc-news-backend-91qy.onrender.com/api/users]
-[https://nc-news-backend-91qy.onrender.com/api/ascii_animals]
+This is an express server built with full TDD, providing information about articles and comments posted in the NC News App.
 
-### Connecting to a database
+**available endpoints**:
+[articles](https://nc-news-backend-91qy.onrender.com/api/articles)
 
-1. Created a `.env.development` and a `.env.test` file, and add the following values:
+[topics](https://nc-news-backend-91qy.onrender.com/api/topics)
+
+[users](https://nc-news-backend-91qy.onrender.com/api/users)
+
+**requirements**:
+Running this app requires local installations of postgreSQL
+
+## Connecting to a database
+
+### Environmental Variables
+
+1. Created a `.env.development` and a `.env.test` file, and add the following value in each of them:
    PGDATABASE=<database_title>

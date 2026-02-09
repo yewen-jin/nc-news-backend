@@ -362,7 +362,21 @@ describe("/api/articles/:article_id/comments", () => {
 });
 
 describe("/api/comments/:comment_id", () => {
-  describe("GET", () => {});
+  describe("GET", () => {
+    test("200: Responds with a 200 status code and the comment with given id upon successful request", () => {
+      return request(app)
+        .get("/api/comments/9")
+        .expect(200)
+        .then(({ body: { comment } }) => {
+          expect(comment.comment_id).toBe(9);
+          expect(comment.article_id).toBeNumber();
+          expect(comment.votes).toBeNumber();
+          expect(comment.body).toBeString();
+          expect(comment.author).toBeString();
+          expect(comment.created_at).toBeString();
+        });
+    });
+  });
   describe("DELETE", () => {
     test("204: Responds with 204 status code if successfully deleted comment, and the comment with the specific id should be deleted", () => {
       return request(app)
