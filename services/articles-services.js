@@ -12,7 +12,7 @@ const {
 
 exports.getAllArticles = (sort_by, order, topic) => {
   if (!topic) {
-    return fetchAllArticles(sort_by, order, topic).then((sortedList) => {
+    return fetchAllArticles(sort_by, order).then((sortedList) => {
       return sortedList;
     });
   } else {
@@ -66,16 +66,8 @@ exports.postComment = (articleId, newComment) => {
     });
 };
 
-exports.patchArticleById = (articleId, updates) => {
-  return updateArticle(articleId, updates)
-    .then((updatedArticle) => {
-      return updatedArticle;
-    })
-    .catch((err) => {
-      // console.log("patching article error:", err);
-      // if the article is not found, the first sql query which tries to return existing vote will return nothing,
-      // The error is generated when trying to read votes property from undefined
-      // the error is caught here
-      throw new NotFoundError("Article Not Found!");
-    });
+exports.patchArticleById = (articleId, newVote) => {
+  return updateArticle(articleId, newVote).then((updatedArticle) => {
+    return updatedArticle;
+  });
 };

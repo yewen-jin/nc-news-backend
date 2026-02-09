@@ -1,5 +1,6 @@
 const db = require("../db/connection");
 const InvalidInputError = require("../errors/invalid-input-error");
+const NotFoundError = require("../errors/not-found-error");
 
 exports.fetchAllArticles = (sort_by = "created_at", order = "desc", topic) => {
   order = order.toLowerCase();
@@ -96,18 +97,22 @@ exports.insertComment = (articleId, newComment) => {
     .then(({ rows }) => rows[0]);
 };
 
-exports.updateArticle = (articleId, updates) => {
+exports.updateArticle = (articleId, newVote) => {
   return db
     .query(`SELECT votes FROM articles WHERE article_id = $1;`, [articleId])
     .then(({ rows }) => {
-      return rows[0].votes; //if article id is invalid, this will generate error
+      if (rows.length === 0) {
+        throw new NotFoundError("Article Not Found!");
+      } else {
+        return rows[0].votes; //if article id is invalid, this will generate error
+      }
     })
     .then((existingVotes) => {
-      const newVote = existingVotes + updates.inc_votes;
+      const updatedVotes = existingVotes + newVote.inc_votes;
       return db
         .query(
           `UPDATE articles SET votes = $1 WHERE article_id = $2 RETURNING *;`,
-          [newVote, articleId],
+          [updatedVotes, articleId],
         )
         .then(({ rows }) => {
           return rows[0];

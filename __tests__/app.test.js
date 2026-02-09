@@ -487,11 +487,74 @@ describe("/api/comments/:comment_id", () => {
         });
     });
   });
+  describe("PATCH", () => {
+    test("200: Responds with an updated comment object, which includes properties of title, topic, author, body, created_at, votes and article_img_url", () => {
+      return request(app)
+        .patch("/api/comments/1")
+        .send({ inc_votes: 1 })
+        .expect(200)
+        .then(({ body: { updatedComment } }) => {
+          expect(updatedComment.body).toBeString();
+          expect(updatedComment.votes).toBeNumber();
+          expect(updatedComment.author).toBeString();
+          expect(updatedComment.created_at).toBeString();
+          expect(updatedComment.article_id).toBeNumber();
+        });
+    });
+    test("200: The votes property in the updatead comment object should be updated by the amount given by the inc_votes value", () => {
+      return request(app)
+        .get("/api/comments/1")
+        .then(({ body: { comment } }) => {
+          return comment.votes;
+        })
+        .then((originalVotes) => {
+          return request(app)
+            .patch("/api/comments/1")
+            .send({ inc_votes: 1 })
+            .then(({ body: { updatedComment } }) => {
+              expect(updatedComment.votes).toBe(originalVotes + 1);
+            });
+        });
+    });
+    test("400: Responds with a 400 error message if the comment_id argument is not a number", () => {
+      return request(app)
+        .patch("/api/comments/notanumber")
+        .send({ inc_votes: 1 })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Invalid comment id format: must be a number");
+        });
+    });
+    test("400: Responds with a 400 error message if if the sent input object doesn't include a property called inc_votes", () => {
+      return request(app)
+        .patch("/api/comments/1")
+        .send({ votes: 1 })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Need to include 'inc_votes' in input");
+        });
+    });
+    test("400: Responds with a 400 error message if the sent input is not an object", () => {
+      return request(app)
+        .patch("/api/comments/1")
+        .send("votes: 1")
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Input needs to be an object");
+        });
+    });
+    test("404: Responds with a 404 error message if the comment_id does not exist in the database", () => {
+      return request(app)
+        .patch("/api/comments/99999")
+        .send({ inc_votes: 1 })
+        .expect(404);
+    });
+  });
   describe("INVALID METHODS", () => {
     test("405: Responds with message for invalid method", () => {
       //the .post() .put() ... are replaced by [method] when method is the variable name that contains literal values of these method strings
       //when using this, each of the method in the array needs to be responded with a 405
-      const invalidMethods = ["post", "put", "patch"].map((method) => {
+      const invalidMethods = ["post", "put"].map((method) => {
         return request(app)
           [method]("/api/comments/1")
           .expect(405)
@@ -559,6 +622,23 @@ describe("/api/users/:username", () => {
         .then(({ body }) => {
           expect(body.msg).toBe("The user doesn't exist");
         });
+    });
+  });
+  describe("INVALID METHODS", () => {
+    test("405: Responds with message for invalid method", () => {
+      //the .post() .put() ... are replaced by [method] when method is the variable name that contains literal values of these method strings
+      //when using this, each of the method in the array needs to be responded with a 405
+      const invalidMethods = ["post", "put", "delete", "patch"].map(
+        (method) => {
+          return request(app)
+            [method]("/api/users/1")
+            .expect(405)
+            .then(({ body }) => {
+              expect(body.msg).toBe("Invalid Methods!");
+            });
+        },
+      );
+      return Promise.all(invalidMethods);
     });
   });
 });

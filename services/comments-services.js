@@ -1,5 +1,9 @@
 const NotFoundError = require("../errors/not-found-error");
-const { fetchCommentById, deleteComment } = require("../models/comments-model");
+const {
+  fetchCommentById,
+  deleteComment,
+  updateComment,
+} = require("../models/comments-model");
 
 exports.getCommentById = (commentId) => {
   return fetchCommentById(commentId).then((fetchedComment) => {
@@ -8,9 +12,11 @@ exports.getCommentById = (commentId) => {
 };
 
 exports.deleteCommentById = (commentId) => {
-  return deleteComment(commentId).then((deletedComment) => {
-    if (deletedComment === undefined) {
-      throw new NotFoundError("Comment doesn't exist!");
-    }
+  return deleteComment(commentId);
+};
+
+exports.patchCommentById = (commentId, newVote) => {
+  return updateComment(commentId, newVote).then((updatedComment) => {
+    return updatedComment;
   });
 };
