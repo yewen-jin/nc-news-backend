@@ -2,21 +2,24 @@ const db = require("../db/connection");
 const InvalidInputError = require("../errors/invalid-input-error");
 
 exports.fetchAllArticles = (sort_by = "created_at", order = "desc", topic) => {
+  order = order.toLowerCase();
+  sort_by = sort_by.toLowerCase();
+
   const allowedInput = [
     "author",
     "title",
-    "article_id",
+    // "article_id",  //arguably not needed
     "topic",
     "created_at",
     "votes",
     "comment_count",
   ];
 
-  if (!allowedInput.includes(sort_by.toLowerCase())) {
+  if (!allowedInput.includes(sort_by)) {
     throw new InvalidInputError(
       `Invalid query input. Valid input for "sort_by" includes: author, title, article_id, topic, created_at, and votes`,
     );
-  } else if (order.toLowerCase() !== "asc" && order.toLowerCase() !== "desc") {
+  } else if (order !== "asc" && order !== "desc") {
     throw new InvalidInputError(
       `Invalid query input. Valid input for "order" should be either "asc or "desc"`,
     );
