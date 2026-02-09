@@ -60,7 +60,15 @@ Requires local installations of
 - nodemon
 - supertest
 
-## Connecting to a database
+### Installing the project
+
+Run the following scripts to clone and install the project
+
+```
+git clone [https://github.com/yewen-jin/nc-news-BE.git](https://github.com/yewen-jin/nc-news-BE.git)
+cd nc-news-BE
+npm install
+```
 
 ### Environment Variables
 
