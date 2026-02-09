@@ -1,50 +1,39 @@
 # Northcoders News Back-end API
 
-A production-grade RESTful API built as part of the Northcoders Software Development Bootcamp.
-This project is a social news similar to Reddit, built with an express server and full TDD, allowing users to interact with articles, leave comments, vote on contents and react with emojis.
+A RESTful API built as part of the Northcoders Software Development Bootcamp.
 
-Live Link: https://nc-news-backend-91qy.onrender.com/api
+This project is a social news website similar to Reddit, built with an Express server using Test-Driven Development (TDD). Users can interact with articles, leave comments, vote on contents and react with emojis.
+
+[The API is hosted here](https://nc-news-backend-91qy.onrender.com/api)
 
 ## Local Setup
 
-**requirements**:
-
-Requires local installations of
+**minimum version requirements**:
 
 - postgreSQL v16+
 - Node.js v20+
-
-**package dependencies**:
-
-- dotenv
-- express
-- pg
-
-**dev dependencies**:
-
-- husky
-- jest
-- jest-extended
-- jest-sorted
-- nodemon
-- supertest
 
 ### Installing the project
 
 Run the following scripts to clone and install the project
 
 ```
-git clone [https://github.com/yewen-jin/nc-news-BE.git](https://github.com/yewen-jin/nc-news-BE.git)
-cd nc-news-BE
+git clone [https://github.com/yewen-jin/nc-news-backend.git](https://github.com/yewen-jin/nc-news-backend.git)
+cd nc-news-backend
 npm install
 ```
 
 ### Environment Variables
 
-In order to connect to the databases, two `.env` files need to be created in the root directory:
+In order to connect to the databases, set up a `.env.development` and a `.env.test` files in the root directory, with the following format:
 
-- a `.env.development` with `PGDATABASE=nc_news`
-- a `.env.test` with `PGDATABASE=nc_news_test`
+```
+PGDATABASE=[dbname]
+PGPORT=5432
+PGHOST=localhost
+PGUSER=[your-db-username]
+PGPASSOWRD=[your-db-password]
+```
 
 ### Database Setup
 
@@ -60,12 +49,11 @@ Run `npm start` to start the server. For local development, run `npm run dev`.
 
 ### Testing
 
-This project is developed using Test-Driven Development.
-To run the full test suite, run `npm test`
+To run the test suite, run `npm test`
 
 ## Production Deployment
 
-This project is currently hosted on Render using a Supabase PostgreSQL database
+This project is hosted on Render using a Supabase PostgreSQL database
 
 ### Endpoints
 
