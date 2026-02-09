@@ -10,9 +10,9 @@ const config = {};
 if (ENV === "production") {
   config.connectionString = process.env.DATABASE_URL;
   config.max = 2;
-  config.ssl = {
+  /*   config.ssl = {
     rejectUnauthorized: false, // Mandatory for Cloud-to-Cloud traffic
-  };
+  }; */
 }
 
 if (!process.env.PGDATABASE && !process.env.DATABASE_URL) {
