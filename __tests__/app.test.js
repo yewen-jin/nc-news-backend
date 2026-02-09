@@ -248,6 +248,15 @@ describe("/api/articles/:article_id", () => {
           },
         );
     });
+    test("400: Responds with an error message when passed an invalid inpush such as a value that's not a number", () => {
+      return request(app)
+        .patch("/api/articles/notanumber")
+        .send({ inc_votes: 1 })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Invalid article id format: must be a number");
+        });
+    });
     test("400: Responds with a 400 error message if the input object doesn't include property of inc_votes", () => {
       return request(app)
         .patch("/api/articles/1")
@@ -320,6 +329,14 @@ describe("/api/articles/:article_id/comments", () => {
           expect(comments).toBeSortedBy("created_at", { descending: true });
         });
     });
+    test("400: Responds with an error message when passed an invalid inpush such as a value that's not a number", () => {
+      return request(app)
+        .get("/api/articles/notanumber/comments")
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Invalid article id format: must be a number");
+        });
+    });
     test("404: Responds with a message when the article doesn't exist", () => {
       return request(app)
         .get("/api/articles/300/comments")
@@ -359,6 +376,15 @@ describe("/api/articles/:article_id/comments", () => {
         .expect(404)
         .then(({ body }) => {
           expect(body.msg).toBe("Article Not Found!");
+        });
+    });
+    test("400: Responds with an error message when passed an invalid inpush such as a value that's not a number", () => {
+      return request(app)
+        .post("/api/articles/notanumber/comments")
+        .send({ username: "butter_bridge", body: "a new comment" })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Invalid article id format: must be a number");
         });
     });
     test("400: Input object doesn't include necessary properties such as username and body", () => {
@@ -414,6 +440,14 @@ describe("/api/comments/:comment_id", () => {
           expect(comment.created_at).toBeString();
         });
     });
+    test("400: Responds with an error message when passed an invalid inpush such as a value that's not a number", () => {
+      return request(app)
+        .get("/api/comments/notanumber")
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Invalid comment id format: must be a number");
+        });
+    });
     test("404: Responds with a 404 status code and a error message saying the comment doesn't exist", () => {
       return request(app)
         .get("/api/comments/100")
@@ -434,6 +468,14 @@ describe("/api/comments/:comment_id", () => {
               expect(rows.length).toBe(0);
             },
           );
+        });
+    });
+    test("400: Responds with an error message when passed an invalid inpush such as a value that's not a number", () => {
+      return request(app)
+        .delete("/api/comments/notanumber")
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Invalid comment id format: must be a number");
         });
     });
     test("404: Responds with a 404 error message if the comment_id does not exist", () => {
