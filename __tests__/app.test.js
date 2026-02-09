@@ -7,10 +7,10 @@ const data = require("../db/data/test-data/index.js");
 beforeEach(() => seed(data));
 afterAll(() => db.end());
 
-describe("Invalid Enpoint", () => {
+describe("Invalid Endpoint", () => {
   test("404: Responds with a message when path is not found", () => {
     return request(app)
-      .get("/fdsa")
+      .get("/unknownEndpoint")
       .expect(404)
       .then(({ body }) => {
         expect(body.msg).toBe("Path not found!");
@@ -32,6 +32,23 @@ describe("/api/topics", () => {
             expect(typeof topic.description).toBe("string");
           });
         });
+    });
+  });
+  describe("INVALID METHODS", () => {
+    test("405: Responds with message for invalid method", () => {
+      //the .post() .put() ... are replaced by [method] when method is the variable name that contains literal values of these method strings
+      //when using this, each of the method in the array needs to be responded with a 405
+      const invalidMethods = ["post", "patch", "put", "delete"].map(
+        (method) => {
+          return request(app)
+            [method]("/api/articles")
+            .expect(405)
+            .then(({ body }) => {
+              expect(body.msg).toBe("Invalid Methods!");
+            });
+        },
+      );
+      return Promise.all(invalidMethods);
     });
   });
 });
@@ -81,6 +98,7 @@ describe("/api/articles", () => {
     test("200: the articles should include a query parameter called sort_by, and the response will be sorted by the given sort_by argument", () => {
       return request(app)
         .get("/api/articles?sort_by=title")
+        .expect(200)
         .then(({ body: { articles } }) => {
           expect(articles).toBeSortedBy("title", { descending: true });
         });
@@ -88,6 +106,7 @@ describe("/api/articles", () => {
     test("200: the articles should include a query parameter called order which should be either ASC or DSC, and the response will be sorted by respective order", () => {
       return request(app)
         .get("/api/articles?order=asc")
+        .expect(200)
         .then(({ body: { articles } }) => {
           expect(articles).toBeSortedBy("created_at", { descending: false });
         });
@@ -95,6 +114,7 @@ describe("/api/articles", () => {
     test("200: Response with only articles with the given topic if a topic argument is given", () => {
       return request(app)
         .get("/api/articles?topic=cats")
+        .expect(200)
         .then(({ body: { articles } }) => {
           articles.forEach((article) => {
             expect(article.topic).toBe("cats");
@@ -103,7 +123,7 @@ describe("/api/articles", () => {
     });
     test("400: if the query argument is not one of the columns or if the order argument is not either 'asc' or 'desc', return a 400 error message saying the query input is invalid", () => {
       return request(app)
-        .get("/api/articles?order=assfa")
+        .get("/api/articles?order=unknown")
         .expect(400)
         .then(({ body }) => {
           expect(body.msg).toBe(
@@ -120,7 +140,6 @@ describe("/api/articles", () => {
         });
     });
   });
-
   describe("INVALID METHODS", () => {
     test("405: Responds with message for invalid method", () => {
       //the .post() .put() ... are replaced by [method] when method is the variable name that contains literal values of these method strings
@@ -191,7 +210,7 @@ describe("/api/articles/:article_id", () => {
           expect(updatedArticle.votes).toBeNumber();
         });
     });
-    test("200: The updated article will have updated number of votes accoding to the the inc_votes propery in the input object", () => {
+    test("200: The updated article will have updated number of votes according to the the inc_votes properly in the input object", () => {
       return request(app)
         .get("/api/articles/3")
         .then(
@@ -214,7 +233,7 @@ describe("/api/articles/:article_id", () => {
     test("400: Responds with a 400 error message if the input object doesn't include property of inc_votes", () => {
       return request(app)
         .patch("/api/articles/1")
-        .send({ randomeStuff: 1 })
+        .send({ randomStuff: 1 })
         .expect(400)
         .then(({ body }) => {
           expect(body.msg).toBe("Need to include 'inc_votes' in input");
@@ -237,6 +256,21 @@ describe("/api/articles/:article_id", () => {
         .then(({ body }) => {
           expect(body.msg).toBe("Article Not Found!");
         });
+    });
+  });
+  describe("INVALID METHODS", () => {
+    test("405: Responds with message for invalid method", () => {
+      //the .post() .put() ... are replaced by [method] when method is the variable name that contains literal values of these method strings
+      //when using this, each of the method in the array needs to be responded with a 405
+      const invalidMethods = ["post", "put", "delete"].map((method) => {
+        return request(app)
+          [method]("/api/articles")
+          .expect(405)
+          .then(({ body }) => {
+            expect(body.msg).toBe("Invalid Methods!");
+          });
+      });
+      return Promise.all(invalidMethods);
     });
   });
 });
@@ -268,7 +302,7 @@ describe("/api/articles/:article_id/comments", () => {
           expect(comments).toBeSortedBy("created_at", { descending: true });
         });
     });
-    test("404: Responds with a message when the article doesn't exis", () => {
+    test("404: Responds with a message when the article doesn't exist", () => {
       return request(app)
         .get("/api/articles/300/comments")
         .expect(404)
@@ -310,6 +344,21 @@ describe("/api/articles/:article_id/comments", () => {
         });
     });
   });
+  describe("INVALID METHODS", () => {
+    test("405: Responds with message for invalid method", () => {
+      //the .post() .put() ... are replaced by [method] when method is the variable name that contains literal values of these method strings
+      //when using this, each of the method in the array needs to be responded with a 405
+      const invalidMethods = ["patch", "put", "delete"].map((method) => {
+        return request(app)
+          [method]("/api/articles")
+          .expect(405)
+          .then(({ body }) => {
+            expect(body.msg).toBe("Invalid Methods!");
+          });
+      });
+      return Promise.all(invalidMethods);
+    });
+  });
 });
 
 describe("/api/comments/:comment_id", () => {
@@ -336,6 +385,21 @@ describe("/api/comments/:comment_id", () => {
         });
     });
   });
+  describe("INVALID METHODS", () => {
+    test("405: Responds with message for invalid method", () => {
+      //the .post() .put() ... are replaced by [method] when method is the variable name that contains literal values of these method strings
+      //when using this, each of the method in the array needs to be responded with a 405
+      const invalidMethods = ["post", "put", "patch"].map((method) => {
+        return request(app)
+          [method]("/api/articles")
+          .expect(405)
+          .then(({ body }) => {
+            expect(body.msg).toBe("Invalid Methods!");
+          });
+      });
+      return Promise.all(invalidMethods);
+    });
+  });
 });
 
 describe("/api/users", () => {
@@ -353,6 +417,23 @@ describe("/api/users", () => {
             expect(typeof user.avatar_url).toBe("string");
           });
         });
+    });
+  });
+  describe("INVALID METHODS", () => {
+    test("405: Responds with message for invalid method", () => {
+      //the .post() .put() ... are replaced by [method] when method is the variable name that contains literal values of these method strings
+      //when using this, each of the method in the array needs to be responded with a 405
+      const invalidMethods = ["post", "put", "delete", "patch"].map(
+        (method) => {
+          return request(app)
+            [method]("/api/articles")
+            .expect(405)
+            .then(({ body }) => {
+              expect(body.msg).toBe("Invalid Methods!");
+            });
+        },
+      );
+      return Promise.all(invalidMethods);
     });
   });
 });
