@@ -2,19 +2,21 @@
 
 This is an express server built with full TDD, providing information about articles and comments posted in the NC News App.
 
-**available endpoints**:
+Live Link: https://nc-news-backend-91qy.onrender.com/api
 
-<a href="https://nc-news-backend-91qy.onrender.com/api/articles" target="_blank">articles</a>
+## Endpoints
 
-<a href="https://nc-news-backend-91qy.onrender.com/api/topics" target="_blank">topics</a>
+The API serves JSON data via the following endpoints:
 
-<a href="https://nc-news-backend-91qy.onrender.com/api/users" target="_blank">users</a>
-
-<!-- [articles](https://nc-news-backend-91qy.onrender.com/api/articles) -->
-
-<!-- [topics](https://nc-news-backend-91qy.onrender.com/api/topics) -->
-
-<!-- [users](https://nc-news-backend-91qy.onrender.com/api/users) -->
+GET: `/api/topics` Get a list of all topics
+GET: `/api/articles` Get a list of all articles
+GET: `/api/articles/:article_id` Get an article by its article ID
+GET: `/api/articles/:article_id/comments` Get the comments of an article by its article ID
+POST `/api/articles/:article_id/comments` Post a new comment
+PATCH: `/api/articles/:article_id` Update an article's vote count
+GET: `/api/comments/:comment_id` Get a comment by comment ID
+DELETE: `/api/comments/:comment_id` Delete a comment by comment ID
+GET: `/api/users` Get all users
 
 **requirements**:
 Running this app requires local installations of postgreSQL later than v16
@@ -36,7 +38,7 @@ Running this app requires local installations of postgreSQL later than v16
 
 ## Connecting to a database
 
-### Environmental Variables
+### Environment Variables
 
 In order to connect to the databases, we need to first create a `.env.development` and a `.env.test` file, and add the following value in each of them:
 `PGDATABASE=<name of the database_title>`
@@ -53,3 +55,5 @@ Run `npm run seed-test` to seed data in the test database
 ### Starting the Server
 
 Run `npm start` to start the server. For local development, run `npm run dev`.
+
+### Testing
