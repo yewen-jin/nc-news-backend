@@ -1,0 +1,13 @@
+{
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+  outputs = { self, nixpkgs }:
+    let
+      system = "x86_64-linux"; # adjust if using arm (aarch64-linux)
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      devShells.${system}.default = pkgs.mkShell {
+        buildInputs = [ pkgs.nodejs_24 pkgs.nodePackages.npm ];
+      };
+    };
+}
