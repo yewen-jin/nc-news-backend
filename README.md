@@ -9,23 +9,32 @@ Live Link: https://nc-news-backend-91qy.onrender.com/api
 
 The API serves JSON data via the following endpoints:
 
-GET: `/api/topics` Get a list of all topics
+GET: `/api/topics`
+Get a list of all topics
 
-GET: `/api/articles` Get a list of all articles
+GET: `/api/articles`
+Get a list of all articles
 
-GET: `/api/articles/:article_id` Get an article by its article ID
+GET: `/api/articles/:article_id`
+Get an article by its article ID
 
-GET: `/api/articles/:article_id/comments` Get the comments of an article by its article ID
+GET: `/api/articles/:article_id/comments`
+Get the comments of an article by its article ID
 
-POST `/api/articles/:article_id/comments` Post a new comment
+POST `/api/articles/:article_id/comments`
+Post a new comment
 
-PATCH: `/api/articles/:article_id` Update an article's vote count
+PATCH: `/api/articles/:article_id`
+Update an article's vote count
 
-GET: `/api/comments/:comment_id` Get a comment by comment ID
+GET: `/api/comments/:comment_id`
+Get a comment by comment ID
 
-DELETE: `/api/comments/:comment_id` Delete a comment by comment ID
+DELETE: `/api/comments/:comment_id`
+Delete a comment by comment ID
 
-GET: `/api/users` Get all users
+GET: `/api/users`
+Get all users
 
 ## Local Setup
 
