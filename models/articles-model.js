@@ -2,21 +2,21 @@ const db = require("../db/connection");
 const InvalidInputError = require("../errors/invalid-input-error");
 
 exports.fetchAllArticles = (sort_by = "created_at", order = "desc", topic) => {
-  const validSortColumn = [
+  const allowedInput = [
     "author",
     "title",
     "article_id",
     "topic",
     "created_at",
     "votes",
+    "comment_count",
   ];
-  const validOrders = ["asc", "desc"];
 
-  if (!validSortColumn.includes(sort_by.toLowerCase())) {
+  if (!allowedInput.includes(sort_by.toLowerCase())) {
     throw new InvalidInputError(
       `Invalid query input. Valid input for "sort_by" includes: author, title, article_id, topic, created_at, and votes`,
     );
-  } else if (!validOrders.includes(order.toLowerCase())) {
+  } else if (order.toLowerCase() !== "asc" && order.toLowerCase() !== "desc") {
     throw new InvalidInputError(
       `Invalid query input. Valid input for "order" should be either "asc or "desc"`,
     );
@@ -38,7 +38,7 @@ exports.fetchAllArticles = (sort_by = "created_at", order = "desc", topic) => {
       `;
 
     if (topic !== undefined) {
-      query += `WHERE articles.topic = $1 
+      query += `WHERE articles.topic ILIKE $1 
       `;
       queryVariables.push(topic);
     }

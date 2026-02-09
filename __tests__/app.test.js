@@ -97,10 +97,10 @@ describe("/api/articles", () => {
     });
     test("200: the articles should include a query parameter called sort_by, and the response will be sorted by the given sort_by argument", () => {
       return request(app)
-        .get("/api/articles?sort_by=title")
+        .get("/api/articles?sort_by=comment_count")
         .expect(200)
         .then(({ body: { articles } }) => {
-          expect(articles).toBeSortedBy("title", { descending: true });
+          expect(articles).toBeSortedBy("comment_count", { descending: true });
         });
     });
     test("200: the articles should include a query parameter called order which should be either ASC or DSC, and the response will be sorted by respective order", () => {
