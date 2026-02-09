@@ -1,8 +1,8 @@
 const express = require("express");
-const topicsRouter = require("./routes/topics-routes");
-const articlesRouter = require("./routes/articles-routes");
-const usersRouter = require("./routes/users-routes");
-const commentsRouter = require("./routes/comments-routes");
+const topicsRouter = require("./routes/topics-router");
+const articlesRouter = require("./routes/articles-router");
+const usersRouter = require("./routes/users-router");
+const commentsRouter = require("./routes/comments-router");
 const NotFoundError = require("./errors/not-found-error");
 const InvalidInputError = require("./errors/invalid-input-error");
 const {
