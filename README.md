@@ -18,7 +18,7 @@ This project is a social news website similar to Reddit, built with an Express s
 Run the following scripts to clone and install the project
 
 ```
-git clone [https://github.com/yewen-jin/nc-news-backend.git](https://github.com/yewen-jin/nc-news-backend.git)
+git clone https://github.com/yewen-jin/nc-news-backend.git
 cd nc-news-backend
 npm install
 ```
