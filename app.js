@@ -1,8 +1,5 @@
 const express = require("express");
-const topicsRouter = require("./routes/topics-router");
-const articlesRouter = require("./routes/articles-router");
-const usersRouter = require("./routes/users-router");
-const commentsRouter = require("./routes/comments-router");
+const apiRouter = require("./routes/api-router");
 const NotFoundError = require("./errors/not-found-error");
 const InvalidInputError = require("./errors/invalid-input-error");
 const {
@@ -14,17 +11,13 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/api", express.static("public"));
 // VALID PATHS
 // The middleware chain only go into any of these if the endpoint matches the argument string
-app.use("/api/topics", topicsRouter);
-app.use("/api/articles", articlesRouter);
-app.use("/api/users", usersRouter);
-app.use("/api/comments", commentsRouter);
+app.use("/api", apiRouter);
 
 // INVALID PATHS
 // Errors in the previous function wouldn't go into this catch app path function because next(err) contains one argument, and it will go to the next middleware function that has 4 arguments, whereas this one has 3
-app.all("{*path}", invalidPathsHandler);
+app.all("/*path", invalidPathsHandler);
 
 // Error handling middleware functions
 // if there are any errors in the middle of the above functions, using next(err) will pass the err object into the next middleware function
