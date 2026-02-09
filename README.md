@@ -10,11 +10,35 @@ This is an express server built with full TDD, providing information about artic
 [users](https://nc-news-backend-91qy.onrender.com/api/users)
 
 **requirements**:
-Running this app requires local installations of postgreSQL
+Running this app requires local installations of postgreSQL later than v16
+
+**package dependencies**:
+
+- dotenv
+- express
+- pg
+
+**dev dependencies**:
+
+- husky
+- jest
+- jest-extended
+- jest-sorted
+- nodemon
+- supertest
 
 ## Connecting to a database
 
 ### Environmental Variables
 
-1. Created a `.env.development` and a `.env.test` file, and add the following value in each of them:
-   PGDATABASE=<database_title>
+In order to connect to the databases, we need to first create a `.env.development` and a `.env.test` file, and add the following value in each of them:
+`PGDATABASE=<name of the database_title>`
+
+### Database Setup
+
+run `npm run setup-dbs` to initialise the local database
+
+### Seeding the Database
+
+run `npm run seed-dev` to seed data in the dev database
+run `npm run seed-test` to seed data in the test database
