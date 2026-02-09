@@ -55,10 +55,10 @@ Requires local installations of
 
 ### Environment Variables
 
-In order to connect to the databases, 2 `.env` files need to be created in the root directory:
+In order to connect to the databases, two `.env` files need to be created in the root directory:
 
 - a `.env.development` with `PGDATABASE=nc_news`
-- a `.env.test` with ``PGDATABASE=nc_news_test`
+- a `.env.test` with `PGDATABASE=nc_news_test`
 
 ### Database Setup
 
@@ -74,4 +74,13 @@ Run `npm start` to start the server. For local development, run `npm run dev`.
 
 ### Testing
 
-This project is developed using Test-Driven Development. To run the full test suite, run `npm test`
+This project is developed using Test-Driven Development.
+To run the full test suite, run `npm test`
+
+## Production Deployment
+
+This project is currently hosted on Render using a Supabase PostgreSQL database
+
+## Acknowledgements
+
+Special thanks to the amazing tutors and fellow students at the Northcoders cohort for making this happen!
