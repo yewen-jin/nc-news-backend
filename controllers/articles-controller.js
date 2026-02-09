@@ -64,7 +64,10 @@ exports.postComment = (req, res, next) => {
 exports.patchArticleById = (req, res, next) => {
   const { article_id } = req.params;
   const updates = req.body;
-  if (typeof updates !== "object" || Array.isArray(updates)) {
+  if (
+    typeof updates !== "object" ||
+    Object.getPrototypeOf(updates) !== Object.prototype
+  ) {
     throw new InvalidInputError("Input needs to be an object");
   } else if (updates.inc_votes === undefined) {
     throw new InvalidInputError("Need to include 'inc_votes' in input");
