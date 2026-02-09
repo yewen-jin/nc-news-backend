@@ -194,9 +194,17 @@ describe("/api/articles/:article_id", () => {
           expect(article.comment_count).toBeNumber();
         });
     });
-    test("404: Responds with a message when passed a valid but non-existent article_id", () => {
+    test("400: Responds with an error message when passed an invalid inpush such as a value that's not a number", () => {
       return request(app)
-        .get("/api/articles/99999")
+        .get("/api/articles/notanumber")
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Invalid article id format: must be a number");
+        });
+    });
+    test("404: Responds with an error message when passed a valid but non-existent article_id", () => {
+      return request(app)
+        .get("/api/articles/9999")
         .expect(404)
         .then(({ body }) => {
           expect(body.msg).toBe("Article not found!");

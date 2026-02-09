@@ -17,13 +17,17 @@ exports.getAllArticles = (req, res) => {
 
 exports.getArticleById = (req, res, next) => {
   const { article_id } = req.params;
-  return getArticleByIdService(article_id)
-    .then((article) => {
-      res.status(200).send({ article });
-    })
-    .catch((err) => {
-      next(err);
-    });
+  if (Number.isNaN(Number(article_id))) {
+    throw new InvalidInputError("Invalid article id format: must be a number");
+  } else {
+    return getArticleByIdService(article_id)
+      .then((article) => {
+        res.status(200).send({ article });
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
 };
 
 exports.getCommentsByArticleId = (req, res, next) => {
