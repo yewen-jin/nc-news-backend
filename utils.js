@@ -6,4 +6,4 @@ function createLookupObj(list, name1, name2) {
   return lookupObj;
 }
 
-module.exports = { createLookupObj, checkExists };
+module.exports = { createLookupObj };
