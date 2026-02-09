@@ -376,6 +376,14 @@ describe("/api/comments/:comment_id", () => {
           expect(comment.created_at).toBeString();
         });
     });
+    test("404: Responds with a 404 status code and a error message saying the comment doesn't exist", () => {
+      return request(app)
+        .get("/api/comments/100")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Comment does not exist.");
+        });
+    });
   });
   describe("DELETE", () => {
     test("204: Responds with 204 status code if successfully deleted comment, and the comment with the specific id should be deleted", () => {
