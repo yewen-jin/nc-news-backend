@@ -5,37 +5,6 @@ This project is a social news similar to Reddit, built with an express server an
 
 Live Link: https://nc-news-backend-91qy.onrender.com/api
 
-## Endpoints
-
-The API serves JSON data via the following endpoints:
-
-GET: `/api/topics`
-Get a list of all topics
-
-GET: `/api/articles`
-Get a list of all articles
-
-GET: `/api/articles/:article_id`
-Get an article by its article ID
-
-GET: `/api/articles/:article_id/comments`
-Get the comments of an article by its article ID
-
-POST `/api/articles/:article_id/comments`
-Post a new comment
-
-PATCH: `/api/articles/:article_id`
-Update an article's vote count
-
-GET: `/api/comments/:comment_id`
-Get a comment by comment ID
-
-DELETE: `/api/comments/:comment_id`
-Delete a comment by comment ID
-
-GET: `/api/users`
-Get all users
-
 ## Local Setup
 
 **requirements**:
@@ -97,6 +66,37 @@ To run the full test suite, run `npm test`
 ## Production Deployment
 
 This project is currently hosted on Render using a Supabase PostgreSQL database
+
+### Endpoints
+
+The API serves JSON data via the following endpoints:
+
+GET: `/api/topics`
+Get a list of all topics
+
+GET: `/api/articles`
+Get a list of all articles
+
+GET: `/api/articles/:article_id`
+Get an article by its article ID
+
+GET: `/api/articles/:article_id/comments`
+Get the comments of an article by its article ID
+
+POST `/api/articles/:article_id/comments`
+Post a new comment
+
+PATCH: `/api/articles/:article_id`
+Update an article's vote count
+
+GET: `/api/comments/:comment_id`
+Get a comment by comment ID
+
+DELETE: `/api/comments/:comment_id`
+Delete a comment by comment ID
+
+GET: `/api/users`
+Get all users
 
 ## Acknowledgements
 
