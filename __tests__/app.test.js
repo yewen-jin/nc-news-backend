@@ -121,13 +121,23 @@ describe("/api/articles", () => {
           });
         });
     });
-    test("400: if the query argument is not one of the columns or if the order argument is not either 'asc' or 'desc', return a 400 error message saying the query input is invalid", () => {
+    test("400: if the sort_by argument is not one of the columns return a 400 error message saying the query input is invalid", () => {
+      return request(app)
+        .get("/api/articles?sort_by=random")
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe(
+            `Invalid query input. Valid input for "sort_by" includes: author, title, article_id, topic, created_at, and votes`,
+          );
+        });
+    });
+    test("400: if the order argument is not either 'asc' or 'desc', return a 400 error message saying the query input is invalid", () => {
       return request(app)
         .get("/api/articles?order=unknown")
         .expect(400)
         .then(({ body }) => {
           expect(body.msg).toBe(
-            `Invalid query input. Valid input for "sort_by" includes: author, title, article_id, topic, created_at, and votes`,
+            `Invalid query input. Valid input for "order" should be either "asc or "desc"`,
           );
         });
     });
@@ -343,8 +353,26 @@ describe("/api/articles/:article_id/comments", () => {
           expect(body.msg).toBe("Article Not Found!");
         });
     });
-    test("400: Input object doesn't include necessary properties", () => {});
-    test("400: Input type is not an object", () => {});
+    test("400: Input object doesn't include necessary properties such as username and body", () => {
+      return request(app)
+        .post("/api/articles/3/comments")
+        .send({ property: "something not related" })
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe(
+            "invalid input: input must include property of username and body",
+          );
+        });
+    });
+    test("400: Input type is not an object", () => {
+      return request(app)
+        .post("/api/articles/3/comments")
+        .send("a string")
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.msg).toBe("invalid input type: input must be an obejct");
+        });
+    });
   });
   describe("INVALID METHODS", () => {
     test("405: Responds with message for invalid method", () => {

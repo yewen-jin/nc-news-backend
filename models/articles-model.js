@@ -12,12 +12,13 @@ exports.fetchAllArticles = (sort_by = "created_at", order = "desc", topic) => {
   ];
   const validOrders = ["asc", "desc"];
 
-  if (
-    !validSortColumn.includes(sort_by.toLowerCase()) ||
-    !validOrders.includes(order.toLowerCase())
-  ) {
+  if (!validSortColumn.includes(sort_by.toLowerCase())) {
     throw new InvalidInputError(
       `Invalid query input. Valid input for "sort_by" includes: author, title, article_id, topic, created_at, and votes`,
+    );
+  } else if (!validOrders.includes(order.toLowerCase())) {
+    throw new InvalidInputError(
+      `Invalid query input. Valid input for "order" should be either "asc or "desc"`,
     );
   } else {
     const queryVariables = [];
@@ -44,8 +45,8 @@ exports.fetchAllArticles = (sort_by = "created_at", order = "desc", topic) => {
 
     query += `GROUP BY articles.article_id 
       ORDER BY ${sort_by} ${order};`;
-    console.log("query: ", query);
-    console.log("query variables: ", queryVariables);
+    // console.log("query: ", query);
+    // console.log("query variables: ", queryVariables);
     return db.query(query, queryVariables).then(({ rows }) => rows);
   }
 };

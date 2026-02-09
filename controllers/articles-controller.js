@@ -40,14 +40,25 @@ exports.getCommentsByArticleId = (req, res, next) => {
 exports.postComment = (req, res, next) => {
   const { article_id } = req.params;
   const newComment = req.body;
-  return postCommentService(article_id, newComment)
-    .then((comment) => {
-      res.status(201).send({ comment });
-    })
-    .catch((err) => {
-      // console.log("controller error: ", err);
-      next(err);
-    });
+  if (
+    typeof newComment !== "object" ||
+    Object.getPrototypeOf(newComment) !== Object.prototype
+  ) {
+    throw new InvalidInputError("invalid input type: input must be an obejct");
+  } else if (!newComment.body || !newComment.username) {
+    throw new InvalidInputError(
+      "invalid input: input must include property of username and body",
+    );
+  } else {
+    return postCommentService(article_id, newComment)
+      .then((comment) => {
+        res.status(201).send({ comment });
+      })
+      .catch((err) => {
+        // console.log("controller error: ", err);
+        next(err);
+      });
+  }
 };
 
 exports.patchArticleById = (req, res, next) => {
