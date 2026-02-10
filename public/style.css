@@ -19,6 +19,11 @@ body {
   color: rgb(0, 0, 0);
 }
 
+td,
+th {
+  border: solid black 1px;
+}
+
 .nav-bar {
   position: sticky;
   top: 0;
@@ -38,6 +43,9 @@ body {
 
 .nav-button:hover {
   background-color: var(--color2);
+}
+
+.queries {
 }
 
 .method {
