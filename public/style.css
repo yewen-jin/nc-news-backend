@@ -21,6 +21,12 @@ body {
   font-weight: 400;
   font-style: normal;
   color: rgb(0, 0, 0);
+  /* cursor:
+    url("./cursors/hand.svg") 12 12,
+    alias;
+  cursor:
+    url("./cursors/circle.svg") 12 12,
+    auto; */
 }
 
 h1 {
@@ -98,7 +104,7 @@ table {
 }
 
 .nav-button:hover {
-  color: var(--color5);
+  /* color: var(--color5); */
   font-weight: 700;
 }
 
