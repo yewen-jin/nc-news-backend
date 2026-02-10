@@ -2,10 +2,10 @@
 
 :root {
   --color1: darksalmon;
-  --color2: darkolivegreen;
-  --dark1: saddlebrown;
-  --color4: slategrey;
-  --color5: rgb(122, 163, 233);
+  --color2: slategrey;
+  --color4: white;
+  --color5: darkolivegreen;
+  --dark1: rgb(51, 51, 51);
 }
 
 a {
@@ -75,7 +75,7 @@ footer {
 td,
 th,
 table {
-  border: dotted rgb(0, 0, 0) 1px;
+  border: dashed rgb(0, 0, 0) 1px;
 }
 
 .nav-bar {
@@ -91,14 +91,14 @@ table {
 }
 
 .nav-button {
-  margin: 3px;
+  margin: 10px;
   color: white;
   font-weight: 300;
   transition: 0.2s;
 }
 
 .nav-button:hover {
-  color: var(--color2);
+  color: var(--color5);
   font-weight: 700;
 }
 
@@ -109,18 +109,25 @@ table {
 }
 
 .methods {
-  background-color: var(--color4);
+  background-color: var(--color2);
   padding: 5px 10px;
+  margin: 5px;
   border: solid black 2px;
   display: flex;
   flex-direction: column;
 }
 
 .endpoint {
-  background-color: var(--color2);
+  background-color: var(--color5);
   border: solid 2px black;
   margin: 10px 0px;
   padding: 10px;
+}
+.endpoint-link {
+  transition: 0.1s;
+}
+.endpoint-link:hover {
+  font-style: italic;
 }
 
 .sample-response {
@@ -131,7 +138,7 @@ table {
 .code-block {
   background-color: var(--dark1);
   color: rgb(255, 255, 255);
-  border: solid white 1px;
+  border: dashed black 1px;
   padding: 0px 20px;
 }
 
@@ -145,7 +152,7 @@ table {
 }
 
 #main-content {
-  background-color: white;
+  background-color: var(--color4);
   border: solid black 2px;
   padding: 0px 10px;
   /* display: grid; */
