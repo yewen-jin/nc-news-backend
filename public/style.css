@@ -35,6 +35,22 @@ h1 {
   margin: 0em;
 }
 
+h5 {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+h6 {
+  font-size: 16px;
+  font-family: 400;
+  font-style: italic;
+}
+
+p {
+  font-size: 16px;
+  font-weight: 400;
+}
+
 footer {
   display: flex;
   align-items: center;
@@ -97,10 +113,16 @@ table {
   padding: 10px;
 }
 
+.sample-response {
+  white-space: pre-wrap;
+  overflow: scroll;
+}
+
 .code-block {
   background-color: var(--dark1);
   color: rgb(255, 255, 255);
   border: solid white 1px;
+  padding: 0px 20px;
 }
 
 .icon {
@@ -129,18 +151,5 @@ h3 {
 }
 h4 {
   /* margin: 2px 10px; */
-  /* font-size: large; */
-}
-h5 {
-  /* margin: 2px 10px; */
-
-  /* font-size: large; */
-}
-h6 {
-}
-p,
-ul {
-  /* margin: 2px 10px; */
-
   /* font-size: large; */
 }
