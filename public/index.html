@@ -31,15 +31,16 @@
     <main id="main-content">
       <h2>Available Endpoints:</h2>
 
-      <ul id="topics" class="endpoint">
-        <h3>/api/topics</h3>
+      <section id="topics" class="endpoint">
+        <h3><a target="_blank" href="/api/topics">/api/topics</a></h3>
         <p>Description:</p>
         <h4>Available Methods:</h4>
-        <li class="method">
-          <h4>GET: /api/topics</h4>
-          <p>Get a list of all topics</p>
-          <h5>Example Response:</h5>
-          <pre class="sameple-response">
+        <ul class="methods">
+          <li class="method">
+            <h4>GET: /api/topics</h4>
+            <p>Get a list of all topics</p>
+            <h5>Example Response:</h5>
+            <pre class="sameple-response">
             <div class="code-block">
               <code>
     {
@@ -61,139 +62,153 @@
               </code>
             </div>
           </pre>
-        </li>
-        <li class="method">
-          <h4>POST: /api/topics</h4>
-          <p>Add a new topic (coming soon)</p>
-        </li>
-      </ul>
+          </li>
+          <li class="method">
+            <h4>POST: /api/topics</h4>
+            <p>Add a new topic (coming soon)</p>
+          </li>
+        </ul>
+      </section>
 
-      <ul id="users" class="endpoint">
+      <section id="users" class="endpoint">
         <h3>/api/users</h3>
         <p>Description</p>
         <h4>Available Methods:</h4>
-        <li class="method">
-          <h4>GET: /api/users</h4>
-          <p>Get all users</p>
-          <h5></h5>
-          <pre><code></code></pre>
-        </li>
-      </ul>
+        <ul class="methods">
+          <li class="method">
+            <h4>GET: /api/users</h4>
+            <p>Get all users</p>
+            <h5></h5>
+            <pre><code></code></pre>
+          </li>
+        </ul>
+      </section>
 
-      <ul id="user-by-username" class="endpoint">
+      <section id="user-by-username" class="endpoint">
         <h3>/api/users/:username</h3>
         <p>Description:</p>
         <h4>Available Methods:</h4>
-        <li class="method">
-          <h4>GET: /api/user/:username</h4>
-          <p>Get the user information with given username</p>
-        </li>
-      </ul>
+        <ul class="methods">
+          <li class="method">
+            <h4>GET: /api/user/:username</h4>
+            <p>Get the user information with given username</p>
+          </li>
+        </ul>
+      </section>
 
-      <ul id="articles" class="endpoint">
+      <section id="articles" class="endpoint">
         <h3>/api/articles</h3>
         <p>Description:</p>
         <h4>Available Methods:</h4>
-        <li class="method">
-          <h4>GET: /api/articles</h4>
-          <p>Get a list of all articles</p>
-          <!-- <h5></h5> -->
-          <!-- <pre><code></code></pre> -->
-          <h5>Query Parameters:</h5>
-          <table class="queries">
-            <tr>
-              <th>Query Parameter</th>
-              <th>Valid Arguments</th>
-              <th>Description</th>
-            </tr>
-            <tr>
-              <td>sort_by</td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>order</td>
-              <td>"asc", "desc"</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>topic</td>
-              <td></td>
-              <td></td>
-            </tr>
-          </table>
-        </li>
-        <li class="method">
-          <h4>POST: /api/articles</h4>
-          <p>Post a new article (coming soon)</p>
-        </li>
-      </ul>
+        <ul class="methods">
+          <li class="method">
+            <h4>GET: /api/articles</h4>
+            <p>Get a list of all articles</p>
+            <!-- <h5></h5> -->
+            <!-- <pre><code></code></pre> -->
+            <h5>Query Parameters:</h5>
+            <table class="queries">
+              <tr>
+                <th>Query Parameter</th>
+                <th>Valid Arguments</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>sort_by</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>order</td>
+                <td>"asc", "desc"</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>topic</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </table>
+          </li>
+          <li class="method">
+            <h4>POST: /api/articles</h4>
+            <p>Post a new article (coming soon)</p>
+          </li>
+        </ul>
+      </section>
 
-      <ul class="endpoint" id="article-by-id">
+      <section class="endpoint" id="article-by-id">
         <h3>/api/articles/:article_id</h3>
         <p>Description:</p>
         <h4>Available Methods:</h4>
-        <li class="method">
-          <h4>GET: /api/articles/:article_id</h4>
-          <p>Get an article by its article ID</p>
-          <h5></h5>
-          <pre><code></code></pre>
-        </li>
-        <li class="method">
-          <h4>PATCH: /api/articles/:article_id</h4>
-          <p>Update an article's vote count</p>
-        </li>
-        <li class="method">
-          <h4>DELETE: /api/articles/:article_id</h4>
-          <p>Delete an article with given article id (coming soon)</p>
-        </li>
-      </ul>
+        <ul class="methods">
+          <li class="method">
+            <h4>GET: /api/articles/:article_id</h4>
+            <p>Get an article by its article ID</p>
+            <h5></h5>
+            <pre><code></code></pre>
+          </li>
+          <li class="method">
+            <h4>PATCH: /api/articles/:article_id</h4>
+            <p>Update an article's vote count</p>
+          </li>
+          <li class="method">
+            <h4>DELETE: /api/articles/:article_id</h4>
+            <p>Delete an article with given article id (coming soon)</p>
+          </li>
+        </ul>
+      </section>
 
-      <ul class="endpoint" id="comments">
+      <section class="endpoint" id="comments">
         <h3>/api/articles/:article_id/comments</h3>
         <p>Description:</p>
         <h4>Available Methods:</h4>
-        <li class="method">
-          <h4>GET: /api/articles/:article_id/comments</h4>
-          <p>Get the comments of an article by its article ID</p>
-          <h5></h5>
-          <pre><code></code></pre>
-        </li>
-        <li class="method">
-          <h4>POST: /api/articles/:article_id/comments</h4>
-          <p>Post a new comment under an article</p>
-          <h5></h5>
-          <pre><code></code></pre>
-        </li>
-      </ul>
+        <ul class="methods">
+          <li class="method">
+            <h4>GET: /api/articles/:article_id/comments</h4>
+            <p>Get the comments of an article by its article ID</p>
+            <h5></h5>
+            <pre><code></code></pre>
+          </li>
+          <li class="method">
+            <h4>POST: /api/articles/:article_id/comments</h4>
+            <p>Post a new comment under an article</p>
+            <h5></h5>
+            <pre><code></code></pre>
+          </li>
+        </ul>
+      </section>
 
-      <ul class="endpoint" id="comment-by-id">
+      <section class="endpoint" id="comment-by-id">
         <h3>/api/comments/comment_id</h3>
         <p>Description:</p>
         <h4>Available Methods:</h4>
-        <li class="method">
-          <h4>GET: /api/comments/:comment_id</h4>
-          <p>Get a comment with given comment ID</p>
-          <h5></h5>
-          <pre><code></code></pre>
-        </li>
-        <li class="method">
-          <h4>PATCH: /api/comments/:comment_id</h4>
-          <p>Update the votes on a comment with given comment ID</p>
-          <h5></h5>
-          <pre><code></code></pre>
-        </li>
-        <li class="method">
-          <h4>DELETE: /api/comments/:comment_id</h4>
-          <p>Delete a comment</p>
-          <h5></h5>
-          <pre><code></code></pre>
-        </li>
-      </ul>
+        <ul class="methods">
+          <li class="method">
+            <h4>GET: /api/comments/:comment_id</h4>
+            <p>Get a comment with given comment ID</p>
+            <h5></h5>
+            <pre><code></code></pre>
+          </li>
+          <li class="method">
+            <h4>PATCH: /api/comments/:comment_id</h4>
+            <p>Update the votes on a comment with given comment ID</p>
+            <h5></h5>
+            <pre><code></code></pre>
+          </li>
+          <li class="method">
+            <h4>DELETE: /api/comments/:comment_id</h4>
+            <p>Delete a comment</p>
+            <h5></h5>
+            <pre><code></code></pre>
+          </li>
+        </ul>
+      </section>
     </main>
     <footer>
       <a target="_blank" href="https://github.com/yewen-jin/nc-news-backend">
-        <img width="40px" alt="GitHub icon" src="./github-svgrepo-com.svg" />
+        <img class="icon" alt="GitHub icon" src="./github-svgrepo-com.svg" />
+        <!-- <p class="icon-text">GitHub Link</p> -->
       </a>
     </footer>
   </body>
