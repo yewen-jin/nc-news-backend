@@ -35,9 +35,19 @@ h1 {
   margin: 0em;
 }
 
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.6rem;
+}
+h4 {
+  font-size: 1.2rem;
+}
+
 h5 {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 h6 {
@@ -141,15 +151,4 @@ table {
   /* display: grid; */
   /* grid-template-columns: 1fr 2fr; */
   /* grid-template-areas: "pic text"; */
-}
-
-h2 {
-  /* font-size: x-large; */
-}
-h3 {
-  /* font-size: larger; */
-}
-h4 {
-  /* margin: 2px 10px; */
-  /* font-size: large; */
 }
