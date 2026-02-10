@@ -31,11 +31,11 @@
     <main id="main-content">
       <h2>Available Endpoints:</h2>
 
-      <section id="topics" class="endpoint">
+      <ul id="topics" class="endpoint">
         <h3>/api/topics</h3>
         <p>Description:</p>
         <h4>Available Methods:</h4>
-        <section class="method">
+        <li class="method">
           <h4>GET: /api/topics</h4>
           <p>Get a list of all topics</p>
           <h5>Example Response:</h5>
@@ -61,39 +61,40 @@
               </code>
             </div>
           </pre>
-        </section>
-        <section class="method">
+        </li>
+        <li class="method">
           <h4>POST: /api/topics</h4>
           <p>Add a new topic (coming soon)</p>
-        </section>
-      </section>
+        </li>
+      </ul>
 
-      <section id="users" class="endpoint">
+      <ul id="users" class="endpoint">
         <h3>/api/users</h3>
         <p>Description</p>
         <h4>Available Methods:</h4>
-        <section class="method">
+        <li class="method">
           <h4>GET: /api/users</h4>
           <p>Get all users</p>
           <h5></h5>
           <pre><code></code></pre>
-        </section>
-      </section>
+        </li>
+      </ul>
 
-      <section id="user-by-username" class="endpoint">
+      <ul id="user-by-username" class="endpoint">
         <h3>/api/users/:username</h3>
         <p>Description:</p>
         <h4>Available Methods:</h4>
-        <section class="method">
+        <li class="method">
           <h4>GET: /api/user/:username</h4>
           <p>Get the user information with given username</p>
-        </section>
-      </section>
-      <section id="articles" class="endpoint">
+        </li>
+      </ul>
+
+      <ul id="articles" class="endpoint">
         <h3>/api/articles</h3>
         <p>Description:</p>
         <h4>Available Methods:</h4>
-        <section class="method">
+        <li class="method">
           <h4>GET: /api/articles</h4>
           <p>Get a list of all articles</p>
           <!-- <h5></h5> -->
@@ -121,75 +122,79 @@
               <td></td>
             </tr>
           </table>
-        </section>
-        <section class="method">
+        </li>
+        <li class="method">
           <h4>POST: /api/articles</h4>
           <p>Post a new article (coming soon)</p>
-        </section>
-      </section>
+        </li>
+      </ul>
 
-      <section id="article-by-id" class="endpoint">
+      <ul class="endpoint" id="article-by-id">
         <h3>/api/articles/:article_id</h3>
         <p>Description:</p>
         <h4>Available Methods:</h4>
-        <section class="method">
+        <li class="method">
           <h4>GET: /api/articles/:article_id</h4>
           <p>Get an article by its article ID</p>
           <h5></h5>
           <pre><code></code></pre>
-        </section>
-        <section class="method">
+        </li>
+        <li class="method">
           <h4>PATCH: /api/articles/:article_id</h4>
           <p>Update an article's vote count</p>
-        </section>
-        <section class="method">
+        </li>
+        <li class="method">
           <h4>DELETE: /api/articles/:article_id</h4>
           <p>Delete an article with given article id (coming soon)</p>
-        </section>
-      </section>
+        </li>
+      </ul>
 
-      <section id="comments" class="endpoint">
+      <ul class="endpoint" id="comments">
         <h3>/api/articles/:article_id/comments</h3>
         <p>Description:</p>
         <h4>Available Methods:</h4>
-        <section class="method">
+        <li class="method">
           <h4>GET: /api/articles/:article_id/comments</h4>
           <p>Get the comments of an article by its article ID</p>
           <h5></h5>
           <pre><code></code></pre>
-        </section>
-        <section class="method">
+        </li>
+        <li class="method">
           <h4>POST: /api/articles/:article_id/comments</h4>
           <p>Post a new comment under an article</p>
           <h5></h5>
           <pre><code></code></pre>
-        </section>
-      </section>
+        </li>
+      </ul>
 
-      <section id="comment-by-id" class="endpoint">
+      <ul class="endpoint" id="comment-by-id">
         <h3>/api/comments/comment_id</h3>
         <p>Description:</p>
         <h4>Available Methods:</h4>
-        <section class="method">
+        <li class="method">
           <h4>GET: /api/comments/:comment_id</h4>
           <p>Get a comment with given comment ID</p>
           <h5></h5>
           <pre><code></code></pre>
-        </section>
-        <section class="method">
+        </li>
+        <li class="method">
           <h4>PATCH: /api/comments/:comment_id</h4>
           <p>Update the votes on a comment with given comment ID</p>
           <h5></h5>
           <pre><code></code></pre>
-        </section>
-        <section class="method">
+        </li>
+        <li class="method">
           <h4>DELETE: /api/comments/:comment_id</h4>
           <p>Delete a comment</p>
           <h5></h5>
           <pre><code></code></pre>
-        </section>
-      </section>
+        </li>
+      </ul>
     </main>
-    <footer></footer>
+    <footer>
+      <a target="_blank" href="https://github.com/yewen-jin/nc-news-backend">
+        <img width="40px" alt="GitHub icon" src="./github-svgrepo-com.svg" />
+      </a>
+    </footer>
   </body>
 </html>
