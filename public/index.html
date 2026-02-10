@@ -34,8 +34,9 @@
       <section id="topics" class="endpoint">
         <h3>/api/topics</h3>
         <p>Description:</p>
+        <h4>Available Methods:</h4>
         <section class="method">
-          <h4>GET: api/topics</h4>
+          <h4>GET: /api/topics</h4>
           <p>Get a list of all topics</p>
           <h5>Example Response:</h5>
           <pre class="sameple-response">
@@ -62,7 +63,7 @@
           </pre>
         </section>
         <section class="method">
-          <h4>POST: api/topics</h4>
+          <h4>POST: /api/topics</h4>
           <p>Add a new topic (coming soon)</p>
         </section>
       </section>
@@ -70,25 +71,37 @@
       <section id="users" class="endpoint">
         <h3>/api/users</h3>
         <p>Description</p>
+        <h4>Available Methods:</h4>
         <section class="method">
           <h4>GET: /api/users</h4>
           <p>Get all users</p>
-          <h4></h4>
+          <h5></h5>
           <pre><code></code></pre>
         </section>
       </section>
 
+      <section id="user-by-username" class="endpoint">
+        <h3>/api/users/:username</h3>
+        <p>Description:</p>
+        <h4>Available Methods:</h4>
+        <section class="method">
+          <h4>GET: /api/user/:username</h4>
+          <p>Get the user information with given username</p>
+        </section>
+      </section>
       <section id="articles" class="endpoint">
         <h3>/api/articles</h3>
         <p>Description:</p>
+        <h4>Available Methods:</h4>
         <section class="method">
           <h4>GET: /api/articles</h4>
           <p>Get a list of all articles</p>
-          <h4></h4>
+          <h5></h5>
           <pre><code></code></pre>
+          <h5>Query Parameters:</h5>
         </section>
         <section class="method">
-          <h4>POST: api/articles</h4>
+          <h4>POST: /api/articles</h4>
           <p>Post a new article (coming soon)</p>
         </section>
       </section>
@@ -96,10 +109,11 @@
       <section id="article-by-id" class="endpoint">
         <h3>/api/articles/:article_id</h3>
         <p>Description:</p>
+        <h4>Available Methods:</h4>
         <section class="method">
           <h4>GET: /api/articles/:article_id</h4>
           <p>Get an article by its article ID</p>
-          <h4></h4>
+          <h5></h5>
           <pre><code></code></pre>
         </section>
         <section class="method">
@@ -115,16 +129,17 @@
       <section id="comments" class="endpoint">
         <h3>/api/articles/:article_id/comments</h3>
         <p>Description:</p>
+        <h4>Available Methods:</h4>
         <section class="method">
-          <h4 class="method">GET: /api/articles/:article_id/comments</h4>
+          <h4>GET: /api/articles/:article_id/comments</h4>
           <p>Get the comments of an article by its article ID</p>
-          <h4></h4>
+          <h5></h5>
           <pre><code></code></pre>
         </section>
         <section class="method">
-          <h4 class="method">POST: /api/articles/:article_id/comments</h4>
+          <h4>POST: /api/articles/:article_id/comments</h4>
           <p>Post a new comment under an article</p>
-          <h4></h4>
+          <h5></h5>
           <pre><code></code></pre>
         </section>
       </section>
@@ -132,22 +147,23 @@
       <section id="comment-by-id" class="endpoint">
         <h3>/api/comments/comment_id</h3>
         <p>Description:</p>
+        <h4>Available Methods:</h4>
         <section class="method">
           <h4>GET: /api/comments/:comment_id</h4>
           <p>Get a comment with given comment ID</p>
-          <h4></h4>
+          <h5></h5>
           <pre><code></code></pre>
         </section>
         <section class="method">
           <h4>PATCH: /api/comments/:comment_id</h4>
           <p>Update the votes on a comment with given comment ID</p>
-          <h4></h4>
+          <h5></h5>
           <pre><code></code></pre>
         </section>
         <section class="method">
           <h4>DELETE: /api/comments/:comment_id</h4>
           <p>Delete a comment</p>
-          <h4></h4>
+          <h5></h5>
           <pre><code></code></pre>
         </section>
       </section>

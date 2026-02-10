@@ -1,8 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
 
+:root {
+  --color1: darksalmon;
+  --color2: darkolivegreen;
+  --color3: saddlebrown;
+  --color4: slategrey;
+  --color5: rgb(122, 163, 233);
+}
 body {
   margin: 50px;
-  background-color: darksalmon;
+  background-color: var(--color1);
   font-family: "Figtree", sans-serif;
   /* font-family: "Times New Roman", serif; */
   font-optical-sizing: auto;
@@ -15,29 +22,42 @@ body {
   justify-content: space-around;
   background-color: black;
   color: rgb(255, 255, 255);
+  padding: 0px;
 }
 
 .nav-button {
-  margin: 5px;
+  margin: 10px;
   color: white;
 }
 
+.nav-button:hover {
+  background-color: var(--color2);
+}
+.method {
+  background-color: var(--color4);
+  padding: 5px 10px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  border: solid rgb(255, 255, 255) 2px;
+}
+
 .endpoint {
-  background-color: darkolivegreen;
+  background-color: var(--color2);
   border: solid 2px black;
   margin: 10px 0px;
-  padding: 0px 10px;
+  padding: 10px;
 }
+
 .code-block {
-  background-color: saddlebrown;
+  background-color: var(--color3);
   color: rgb(255, 255, 255);
 }
 
 #main-content {
   background-color: white;
   border: solid black 2px;
-  display: grid;
   padding: 0px 10px;
+  /* display: grid; */
   /* grid-template-columns: 1fr 2fr; */
   /* grid-template-areas: "pic text"; */
 }
