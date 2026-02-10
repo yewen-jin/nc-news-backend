@@ -7,6 +7,7 @@
   --color4: slategrey;
   --color5: rgb(122, 163, 233);
 }
+
 body {
   margin: 50px;
   background-color: var(--color1);
@@ -17,8 +18,13 @@ body {
   font-style: normal;
   color: rgb(0, 0, 0);
 }
+
 .nav-bar {
+  position: sticky;
+  top: 0;
+  overflow: hidden;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   background-color: black;
   color: rgb(255, 255, 255);
@@ -26,19 +32,20 @@ body {
 }
 
 .nav-button {
-  margin: 10px;
+  margin: 3px;
   color: white;
 }
 
 .nav-button:hover {
   background-color: var(--color2);
 }
+
 .method {
   background-color: var(--color4);
   padding: 5px 10px;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  border: solid rgb(255, 255, 255) 2px;
+  border: solid black 2px;
 }
 
 .endpoint {
@@ -51,6 +58,7 @@ body {
 .code-block {
   background-color: var(--color3);
   color: rgb(255, 255, 255);
+  border: solid white 1px;
 }
 
 #main-content {
