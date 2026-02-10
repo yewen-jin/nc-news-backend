@@ -1,33 +1,61 @@
 @import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
 
 body {
-  background-color: black;
+  margin: 50px;
+  background-color: darksalmon;
   font-family: "Figtree", sans-serif;
+  /* font-family: "Times New Roman", serif; */
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  color: rgb(202, 202, 202);
+  color: rgb(0, 0, 0);
 }
 
+.code-block {
+  background-color: saddlebrown;
+  color: rgb(255, 255, 255);
+}
+
+.endpoint {
+  background-color: darkolivegreen;
+}
+
+#main-content {
+  border: solid chartreuse 2px;
+  display: grid;
+  /* grid-template-columns: 1fr 2fr; */
+  /* grid-template-areas: "pic text"; */
+}
+
+h1 h2 h3 h4 {
+  margin: 10px 10px;
+}
 h1 {
-  font-size: xx-large;
+  /* font-size: xx-large; */
 }
 h2 {
-  font-size: x-large;
+  /* font-size: x-large; */
 }
 h3 {
-  font-size: larger;
+  /* font-size: larger; */
 }
 h4 {
-  font-size: large;
+  /* margin: 2px 10px; */
+  /* font-size: large; */
 }
 h5 {
-  font-size: large;
+  /* margin: 2px 10px; */
+
+  /* font-size: large; */
 }
 h6 {
-  font-size: large;
+  /* margin: 2px 10px; */
+
+  /* font-size: large; */
 }
 p,
 ul {
-  font-size: large;
+  /* margin: 2px 10px; */
+
+  /* font-size: large; */
 }

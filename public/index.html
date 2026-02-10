@@ -4,52 +4,150 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NC News API</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header>
       <h1>NC News API</h1>
-      <h3>This API serves JSON data via the following endpoints:</h3>
+      <p>
+        This API serves JSON data via a list of endpoints, where you can access
+        content of articles, users, comments, topics and other relevant
+        information for the news website.
+      </p>
     </header>
-    <main>
-      <section>
-        <p class="endpoint">
-          GET: '/api/topics' </Br> Get a list of all topics
-        </p>
-        <p class="endpoint">
-          GET: '/api/users' </Br> Get all users
-        </p>
-        <p class="endpoint">
-          GET: '/api/articles' </Br> Get a list of all articles
-        </p>
-        <p class="endpoint">
-          GET: '/api/articles/:article_id' </Br> Get an article by its article ID
-        </p>
-        <p class="endpoint">
-          GET: '/api/articles/:article_id/comments' </Br> Get the comments of an
-          article by its article ID
-        </p>
-        <p class="endpoint">
-          GET: '/api/comments/:comment_id' </Br> Get a comment by comment ID
-        </p>
+
+    <nav class="nav-bar">
+      <a href="#topics">/api/topics</a>
+      <a href="#users">/api/users</a>
+      <a href="#user-by-username">/api/users/:username</a>
+      <a href="#articles">/api/articles</a>
+      <a href="#article-by-id">/api/articles/:article_id</a>
+      <a href="#comments">/api/articles/:article_id/comments</a>
+      <a href="#comment-by-id">/api/comments/:comment_id</a>
+    </nav>
+
+    <main id="main-content">
+      <h2>Available Endpoints:</h2>
+
+      <section id="topics" class="endpoint">
+        <h3>/api/topics</h3>
+        <p>Description:</p>
+        <section class="method">
+          <h4>GET: api/topics</h4>
+          <p>Get a list of all topics</p>
+          <h5>Example Response:</h5>
+          <pre class="sameple-response">
+            <div class="code-block">
+              <code>
+                {
+                  "topics": [
+                    {
+                      "slug": "coding",
+                      "description": "Code is love, code is life"
+                    },
+                    {
+                      "slug": "football",
+                      "description": "FOOTIE!"
+                    },
+                    {
+                      "slug": "cooking",
+                      "description": "Hey good looking, what you got cooking?"
+                    }
+                  ]
+                }
+              </code>
+            </div>
+          </pre>
+        </section>
+        <section class="method">
+          <h4>POST: api/topics</h4>
+          <p>Add a new topic (coming soon)</p>
+        </section>
       </section>
 
-      <section>
-        <p class="endpoint">
-          POST '/api/articles/:article_id/comments' </Br> Post a new comment
-    </p>
+      <section id="users" class="endpoint">
+        <h3>/api/users</h3>
+        <p>Description</p>
+        <section class="method">
+          <h4>GET: /api/users</h4>
+          <p>Get all users</p>
+          <h4></h4>
+          <pre><code></code></pre>
+        </section>
       </section>
 
-      <section>
-        <p class="endpoint">
-          PATCH: '/api/articles/:article_id' </Br> Update an article's vote count
-        </p>
+      <section id="articles" class="endpoint">
+        <h3>/api/articles</h3>
+        <p>Description:</p>
+        <section class="method">
+          <h4>GET: /api/articles</h4>
+          <p>Get a list of all articles</p>
+          <h4></h4>
+          <pre><code></code></pre>
+        </section>
+        <section class="method">
+          <h4>POST: api/articles</h4>
+          <p>Post a new article (coming soon)</p>
+        </section>
       </section>
 
-      <section>
-        <p class="endpoint">
-          DELETE: '/api/comments/:comment_id' </Br> Delete a comment by comment ID
-        </p>
+      <section id="article-by-id" class="endpoint">
+        <h3>/api/articles/:article_id</h3>
+        <p>Description:</p>
+        <section class="method">
+          <h4>GET: /api/articles/:article_id</h4>
+          <p>Get an article by its article ID</p>
+          <h4></h4>
+          <pre><code></code></pre>
+        </section>
+        <section class="method">
+          <h4>PATCH: /api/articles/:article_id</h4>
+          <p>Update an article's vote count</p>
+        </section>
+        <section class="method">
+          <h4>DELETE: /api/articles/:article_id</h4>
+          <p>Delete an article with given article id (coming soon)</p>
+        </section>
+      </section>
+
+      <section id="comments" class="endpoint">
+        <h3>/api/articles/:article_id/comments</h3>
+        <p>Description:</p>
+        <section class="method">
+          <h4 class="method">GET: /api/articles/:article_id/comments</h4>
+          <p>Get the comments of an article by its article ID</p>
+          <h4></h4>
+          <pre><code></code></pre>
+        </section>
+        <section class="method">
+          <h4 class="method">POST: /api/articles/:article_id/comments</h4>
+          <p>Post a new comment under an article</p>
+          <h4></h4>
+          <pre><code></code></pre>
+        </section>
+      </section>
+
+      <section id="comment-by-id" class="endpoint">
+        <h3>/api/comments/comment_id</h3>
+        <p>Description:</p>
+        <section class="method">
+          <h4>GET: /api/comments/:comment_id</h4>
+          <p>Get a comment with given comment ID</p>
+          <h4></h4>
+          <pre><code></code></pre>
+        </section>
+        <section class="method">
+          <h4>PATCH: /api/comments/:comment_id</h4>
+          <p>Update the votes on a comment with given comment ID</p>
+          <h4></h4>
+          <pre><code></code></pre>
+        </section>
+        <section class="method">
+          <h4>DELETE: /api/comments/:comment_id</h4>
+          <p>Delete a comment</p>
+          <h4></h4>
+          <pre><code></code></pre>
+        </section>
       </section>
     </main>
     <footer></footer>

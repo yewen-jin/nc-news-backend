@@ -13,6 +13,7 @@ app.use(express.json());
 
 // VALID PATHS
 // The middleware chain only go into any of these if the endpoint matches the argument string
+app.use("/docs", express.static("public"));
 app.use("/api", apiRouter);
 
 // INVALID PATHS
