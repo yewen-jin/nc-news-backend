@@ -8,6 +8,7 @@ const {
   checkIfArticleExists,
   updateArticle,
   checkIfTopicExists,
+  insertArticle,
 } = require("../models/articles-model");
 
 exports.getAllArticles = (sort_by, order, topic) => {
@@ -70,4 +71,8 @@ exports.patchArticleById = (articleId, newVote) => {
   return updateArticle(articleId, newVote).then((updatedArticle) => {
     return updatedArticle;
   });
+};
+
+exports.postArticle = () => {
+  return insertArticle();
 };

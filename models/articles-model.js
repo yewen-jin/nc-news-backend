@@ -120,6 +120,12 @@ exports.updateArticle = (articleId, newVote) => {
     });
 };
 
+exports.insertArticle = () => {
+  return db.query("").then(({ rows }) => {
+    return rows[0];
+  });
+};
+
 exports.checkIfArticleExists = (articleId) => {
   return db
     .query(`SELECT * FROM articles WHERE article_id = $1`, [articleId])

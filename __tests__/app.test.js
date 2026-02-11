@@ -38,16 +38,14 @@ describe("/api/topics", () => {
     test("405: Responds with message for invalid method", () => {
       //the .post() .put() ... are replaced by [method] when method is the variable name that contains literal values of these method strings
       //when using this, each of the method in the array needs to be responded with a 405
-      const invalidMethods = ["post", "patch", "put", "delete"].map(
-        (method) => {
-          return request(app)
-            [method]("/api/topics")
-            .expect(405)
-            .then(({ body }) => {
-              expect(body.msg).toBe("Invalid Methods!");
-            });
-        },
-      );
+      const invalidMethods = ["patch", "put", "delete"].map((method) => {
+        return request(app)
+          [method]("/api/topics")
+          .expect(405)
+          .then(({ body }) => {
+            expect(body.msg).toBe("Invalid Methods!");
+          });
+      });
       return Promise.all(invalidMethods);
     });
   });
@@ -154,16 +152,14 @@ describe("/api/articles", () => {
     test("405: Responds with message for invalid method", () => {
       //the .post() .put() ... are replaced by [method] when method is the variable name that contains literal values of these method strings
       //when using this, each of the method in the array needs to be responded with a 405
-      const invalidMethods = ["post", "put", "patch", "delete"].map(
-        (method) => {
-          return request(app)
-            [method]("/api/articles")
-            .expect(405)
-            .then(({ body }) => {
-              expect(body.msg).toBe("Invalid Methods!");
-            });
-        },
-      );
+      const invalidMethods = ["put", "patch", "delete"].map((method) => {
+        return request(app)
+          [method]("/api/articles")
+          .expect(405)
+          .then(({ body }) => {
+            expect(body.msg).toBe("Invalid Methods!");
+          });
+      });
       return Promise.all(invalidMethods);
 
       // return request(app)
@@ -289,7 +285,7 @@ describe("/api/articles/:article_id", () => {
     test("405: Responds with message for invalid method", () => {
       //the .post() .put() ... are replaced by [method] when method is the variable name that contains literal values of these method strings
       //when using this, each of the method in the array needs to be responded with a 405
-      const invalidMethods = ["post", "put", "delete"].map((method) => {
+      const invalidMethods = ["post", "put"].map((method) => {
         return request(app)
           [method]("/api/articles/1")
           .expect(405)

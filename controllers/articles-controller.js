@@ -4,6 +4,7 @@ const {
   getCommentsByArticleId: getCommentsByArticleIdService,
   postComment: postCommentService,
   patchArticleById: patchArticleByIdService,
+  postArticle: postArticleService,
 } = require("../services/articles-services");
 const InvalidInputError = require("../errors/invalid-input-error");
 
@@ -100,4 +101,8 @@ exports.patchArticleById = (req, res, next) => {
         next(err);
       });
   }
+};
+
+exports.postArticle = (req, res, next) => {
+  return postArticleService();
 };

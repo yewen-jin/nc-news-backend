@@ -6,11 +6,16 @@ const {
   getCommentsByArticleId,
   postComment,
   patchArticleById,
+  postArticle,
 } = require("../controllers/articles-controller");
 
 const router = express.Router();
 
-router.route("/").get(getAllArticles).all(invalidMethodsHandler);
+router
+  .route("/")
+  .get(getAllArticles)
+  .post(postArticle)
+  .all(invalidMethodsHandler);
 
 router
   .route("/:article_id")
