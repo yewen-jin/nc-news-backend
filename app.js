@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const apiRouter = require("./routes/api-router");
 const NotFoundError = require("./errors/not-found-error");
 const InvalidInputError = require("./errors/invalid-input-error");
@@ -9,6 +10,7 @@ const {
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 // VALID PATHS
