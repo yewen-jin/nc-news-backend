@@ -32,7 +32,7 @@ PGDATABASE=[dbname]
 PGPORT=5432
 PGHOST=localhost
 PGUSER=[your-db-username]
-PGPASSOWRD=[your-db-password]
+PGPASSWORD=[your-db-password]
 ```
 
 ### Database Setup
