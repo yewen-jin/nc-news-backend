@@ -1,21 +1,23 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>NC News API</title>
-        <link rel="stylesheet" href="style.css" />
-        <link rel="icon" type="image/x-icon" href="./icons/favicon.ico" />
-    </head>
-    <body>
-        <header>
-            <h1>NC News API</h1>
-            <p>
-                This API serves JSON data via a list of endpoints, where you can
-                access content of articles, users, comments, topics and other
-                relevant information for the news website.
-            </p>
-        </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NC News API</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="./icons/favicon.ico" />
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>NC News API</h1>
+      <p>
+        This API serves JSON data via a list of endpoints, where you can access
+        content of articles, users, comments, topics and other relevant
+        information for the news website.
+      </p>
+    </header>
 
         <nav class="nav-bar">
             <a class="nav-button" href="#topics">/api/topics</a>
@@ -220,6 +222,7 @@
                 </ul>
             </section>
 
+<<<<<<< HEAD
             <section class="endpoint" id="comment-by-id">
                 <h3>
                     <a
@@ -269,4 +272,53 @@
             </a>
         </footer>
     </body>
+=======
+      <section class="endpoint" id="comment-by-id">
+        <h3>
+          <a class="endpoint-link" target="_blank" href="/api/comments/1"
+            >/api/comments/:comment_id</a
+          >
+        </h3>
+        <p>Description:</p>
+        <h4>Available Methods:</h4>
+        <ul class="methods">
+          <li class="method">
+            <h4>GET: /api/comments/:comment_id</h4>
+            <p>Get a comment with given comment ID</p>
+          </li>
+          <li class="method">
+            <h4>PATCH: /api/comments/:comment_id</h4>
+            <p>Update the votes on a comment with given comment ID</p>
+          </li>
+          <li class="method">
+            <h4>DELETE: /api/comments/:comment_id</h4>
+            <p>Delete a comment</p>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer>
+      <!-- <a
+        class="endpoint-link"
+        target="_blank"
+        href="https://github.com/yewen-jin/nc-news-backend"
+      >
+        <img
+          class="icon"
+          alt="GitHub icon"
+          src="./icons/github-svgrepo-com.svg"
+        />
+      </a> -->
+      <!-- Place this tag where you want the button to render. -->
+      <a
+        class="github-button"
+        href="https://github.com/yewen-jin"
+        data-color-scheme="no-preference: light; light: dark; dark: light;"
+        data-size="large"
+        aria-label="Follow @yewen-jin on GitHub"
+        >@yewen-jin</a
+      >
+    </footer>
+  </body>
+>>>>>>> 1f0905331ce04c73c6e02f41637e2a6f8b64c108
 </html>

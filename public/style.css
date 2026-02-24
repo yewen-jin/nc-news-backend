@@ -150,7 +150,7 @@ table {
 
 .sample-response {
   white-space: pre-wrap;
-  overflow: scroll;
+  /*overflow: scroll;*/
 }
 
 .code-block {
