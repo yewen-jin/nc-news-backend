@@ -15,7 +15,7 @@ module.exports = [
         username: "happyamy2016",
         name: "Amy Happy",
         avatar_url:
-            "https://vignette1.wikia.nocookie.net/mrmen/images/7/7f/Mr_Happy.jpg/revision/latest?cb=20140102171729",
+            "https://static.wikia.nocookie.net/the-mr-men-showpediaom/images/7/7d/MainLittleMissSunshine.png/revision/latest?cb=20190924010233",
     },
     {
         username: "cooljmessy",
