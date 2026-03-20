@@ -1,0 +1,18 @@
+name: Scheduled Ping
+
+on:
+    schedule:
+        # * is a special character in YAML so you have to quote this string
+        # /30 denotes that it will run once every 30 minutes
+        - cron: "*/10 * * * *"
+
+jobs:
+    pinger_job:
+        name: ping render every 10 min
+        runs-on: ubuntu-latest
+        env:
+            URL:
+            METHOD: GET
+        steps:
+            - id: ping-render-server
+              run: curl https://nc-news-backend-91qy.onrender.com
