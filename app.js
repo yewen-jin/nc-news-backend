@@ -4,9 +4,9 @@ const apiRouter = require("./routes/api-router");
 const NotFoundError = require("./errors/not-found-error");
 const InvalidInputError = require("./errors/invalid-input-error");
 const {
-    genericErrorHandler,
+    internalErrorHandler,
     invalidPathsHandler,
-} = require("./errors/error-handler");
+} = require("./controllers/error-handling-controller");
 
 const app = express();
 
@@ -28,6 +28,6 @@ app.use((err, req, res, next) => {
     }
 });
 
-app.use(genericErrorHandler);
+app.use(internalErrorHandler);
 
 module.exports = app;

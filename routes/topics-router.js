@@ -1,6 +1,8 @@
 const express = require("express");
 const { getAllTopics } = require("../controllers/topics-controller");
-const { invalidMethodsHandler } = require("../errors/error-handler");
+const {
+    invalidMethodsHandler,
+} = require("../controllers/error-handling-controller");
 
 const router = express.Router();
 
