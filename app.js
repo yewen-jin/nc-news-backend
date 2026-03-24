@@ -18,16 +18,7 @@ app.use("/docs", express.static("public"));
 app.use("/api", apiRouter);
 app.all("/*path", invalidPathsHandler);
 
-app.use((err, req, res, next) => {
-    if (err instanceof NotFoundError) {
-        res.status(404).send({ msg: err.message });
-    } else if (err instanceof InvalidInputError) {
-        res.status(400).send({ msg: err.message });
-    } else {
-        next(err);
-    }
-});
-
+app.use(errorHandlers);
 app.use(internalErrorHandler);
 
 module.exports = app;
