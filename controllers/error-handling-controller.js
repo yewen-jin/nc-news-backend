@@ -1,5 +1,5 @@
-const NotFoundError = require("./errors/not-found-error");
-const InvalidInputError = require("./errors/invalid-input-error");
+const NotFoundError = require("../errors/not-found-error");
+const InvalidInputError = require("../errors/invalid-input-error");
 
 exports.errorHandlers = (err, req, res, next) => {
     if (err instanceof NotFoundError) {

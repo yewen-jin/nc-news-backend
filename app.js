@@ -1,11 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const apiRouter = require("./routes/api-router");
-const NotFoundError = require("./errors/not-found-error");
-const InvalidInputError = require("./errors/invalid-input-error");
 const {
     internalErrorHandler,
     invalidPathsHandler,
+    errorHandlers,
 } = require("./controllers/error-handling-controller");
 
 const app = express();
